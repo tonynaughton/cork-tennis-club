@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.ResultsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
