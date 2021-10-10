@@ -1,3 +1,7 @@
 package ie.wit.tennisapp.models
 
-data class MatchModel(var result: String = "")
+data class MatchModel(
+    var playerOne: String = "",
+    var playerTwo: String = "",
+    var result: String = ""
+)
