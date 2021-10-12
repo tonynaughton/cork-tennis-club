@@ -31,11 +31,7 @@ class AddResultActivity : AppCompatActivity() {
             match.playerTwo = binding.matchPlayerTwo.text.toString()
             match.result = binding.matchResult.text.toString()
             if (match.playerOne.isNotEmpty() && match.playerTwo.isNotEmpty() && match.result.isNotEmpty()) {
-                app.matches.add((match.copy()))
-                i("add Button Pressed: $match")
-                for (i in app.matches.indices) {
-                    i("Match [$i]:${this.app.matches[i]}")
-                }
+                app.matches.create(match.copy())
                 setResult(RESULT_OK)
                 finish()
             } else {

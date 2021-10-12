@@ -10,8 +10,10 @@ import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityResultsListBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.adapters.MatchAdapter
+import ie.wit.tennisapp.adapters.ResultsListener
+import ie.wit.tennisapp.models.MatchModel
 
-class ResultsListActivity : AppCompatActivity() {
+class ResultsListActivity : AppCompatActivity(), ResultsListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityResultsListBinding
@@ -20,14 +22,14 @@ class ResultsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = MatchAdapter(app.matches)
+        binding.recyclerView.adapter = MatchAdapter(app.matches.findAll(), this)
         binding.toolbar.title = title
-        setSupportActionBar(binding.toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -43,5 +45,10 @@ class ResultsListActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResultClick(placemark: MatchModel) {
+        val launcherIntent = Intent(this, AddResultActivity::class.java)
+        startActivityForResult(launcherIntent,0)
     }
 }
