@@ -5,4 +5,5 @@
     <string name="hint_matchPlayerOne">Player 1</string>
     <string name="hint_matchPlayerTwo">Player 2</string>
     <string name="menu_addResult">Add</string>
+    <string name="menu_cancelAddResult">Cancel</string>
 </resources>
