@@ -47,8 +47,14 @@ class ResultsListActivity : AppCompatActivity(), ResultsListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onResultClick(placemark: MatchModel) {
+    override fun onResultClick(result: MatchModel) {
         val launcherIntent = Intent(this, AddResultActivity::class.java)
+        launcherIntent.putExtra("result_edit", result)
         startActivityForResult(launcherIntent,0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

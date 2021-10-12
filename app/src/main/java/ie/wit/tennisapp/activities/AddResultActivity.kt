@@ -9,7 +9,6 @@ import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityAddResultBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MatchModel
-import timber.log.Timber.i
 
 class AddResultActivity : AppCompatActivity() {
 
@@ -19,6 +18,7 @@ class AddResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
         binding = ActivityAddResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -26,19 +26,33 @@ class AddResultActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
+
+        if (intent.hasExtra("result_edit")) {
+            edit = true
+            match = intent.extras?.getParcelable("result_edit")!!
+            binding.matchPlayerOne.setText(match.playerOne)
+            binding.matchPlayerTwo.setText(match.playerTwo)
+            binding.matchResult.setText(match.result)
+            binding.btnAdd.setText(R.string.save_result)
+        }
+
         binding.btnAdd.setOnClickListener() {
             match.playerOne = binding.matchPlayerOne.text.toString()
             match.playerTwo = binding.matchPlayerTwo.text.toString()
             match.result = binding.matchResult.text.toString()
-            if (match.playerOne.isNotEmpty() && match.playerTwo.isNotEmpty() && match.result.isNotEmpty()) {
-                app.matches.create(match.copy())
-                setResult(RESULT_OK)
-                finish()
-            } else {
+            if (match.playerOne.isEmpty() || match.playerTwo.isEmpty() || match.result.isEmpty()) {
                 Snackbar
-                    .make(it, "Please fill in all fields", Snackbar.LENGTH_LONG)
+                    .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.matches.update(match.copy())
+                } else {
+                    app.matches.create(match.copy())
+                }
             }
+            setResult(RESULT_OK)
+            finish()
         }
     }
 

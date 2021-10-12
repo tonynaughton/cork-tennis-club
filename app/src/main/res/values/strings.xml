@@ -6,4 +6,6 @@
     <string name="hint_matchPlayerTwo">Player 2</string>
     <string name="menu_addResult">Add</string>
     <string name="menu_cancelAddResult">Cancel</string>
+    <string name="save_result">Update Result</string>
+    <string name="fill_in_all_fields">Please fill in all fields</string>
 </resources>
