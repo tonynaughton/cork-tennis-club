@@ -13,8 +13,5 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Tennis App started")
-        matches.add(MatchModel("Test Player", "Test Player", "2-0"))
-        matches.add(MatchModel("Test Player", "Test Player", "0-2"))
-        matches.add(MatchModel("Test Player", "Test Player", "3-1"))
     }
 }

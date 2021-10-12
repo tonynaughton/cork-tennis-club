@@ -35,7 +35,7 @@
             android:layout_below="@id/appBarLayout"
             android:fillViewport="true">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -47,11 +47,29 @@
                     android:layout_margin="8dp"
                     android:hint="@string/hint_matchPlayerOne"
                     android:inputType="text"
-                    android:maxLength="25"
+                    android:maxLength="30"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:layout_toLeftOf="@id/matchResult"
+                    android:layout_alignParentStart="true"
+                    />
+
+                <EditText
+                    android:id="@+id/matchResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_matchResult"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp"
+                    android:layout_centerHorizontal="true"
+                    />
 
                 <EditText
                     android:id="@+id/matchPlayerTwo"
@@ -64,34 +82,25 @@
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/matchResult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:hint="@string/hint_matchResult"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:layout_toRightOf="@id/matchResult"
+                    android:layout_alignParentEnd="true"
+                    />
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
                     android:background="@color/colorAccent"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
+                    android:padding="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addMatchResult"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                    android:textSize="16sp"
+                    android:layout_below="@id/matchResult"
+                    />
+            </RelativeLayout>
         </ScrollView>
 
     </RelativeLayout>

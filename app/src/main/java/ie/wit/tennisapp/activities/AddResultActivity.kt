@@ -29,6 +29,8 @@ class AddResultActivity : AppCompatActivity() {
                 i("add Button Pressed: $match")
                 for (i in app.matches.indices)
                     { i("Match [$i]:${this.app.matches[i]}") }
+                setResult(RESULT_OK)
+                finish()
             }
             else {
                 Snackbar
