@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApp">
         <activity
-            android:name=".activities.ResultsListActivity"
+            android:name=".activities.AddMemberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AddResultActivity">
-        </activity>
+        <activity android:name=".activities.ListResultsActivity" />
+        <activity android:name=".activities.AddResultActivity" />
+        <activity android:name=".activities.ListMembersActivity" />
     </application>
 
 </manifest>

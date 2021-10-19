@@ -6,20 +6,20 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.databinding.ActivityAddResultBinding
+import ie.wit.tennisapp.databinding.ActivityAddMemberBinding
 import ie.wit.tennisapp.main.MainApp
-import ie.wit.tennisapp.models.MatchModel
+import ie.wit.tennisapp.models.MemberModel
 
-class AddResultActivity : AppCompatActivity() {
+class AddMemberActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddResultBinding
-    var match = MatchModel()
+    private lateinit var binding: ActivityAddMemberBinding
+    var member = MemberModel()
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var edit = false
-        binding = ActivityAddResultBinding.inflate(layoutInflater)
+        binding = ActivityAddMemberBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbarAdd.title = title
@@ -27,28 +27,28 @@ class AddResultActivity : AppCompatActivity() {
 
         app = application as MainApp
 
-        if (intent.hasExtra("result_edit")) {
+        if (intent.hasExtra("member_edit")) {
             edit = true
-            match = intent.extras?.getParcelable("result_edit")!!
-            binding.matchPlayerOne.setText(match.playerOne)
-            binding.matchPlayerTwo.setText(match.playerTwo)
-            binding.matchResult.setText(match.result)
+            member = intent.extras?.getParcelable("member_edit")!!
+            binding.memberFirstName.setText(member.firstName)
+            binding.memberLastName.setText(member.lastName)
+            binding.memberAge.setText(member.age)
             binding.btnAdd.setText(R.string.save_result)
         }
 
         binding.btnAdd.setOnClickListener() {
-            match.playerOne = binding.matchPlayerOne.text.toString()
-            match.playerTwo = binding.matchPlayerTwo.text.toString()
-            match.result = binding.matchResult.text.toString()
-            if (match.playerOne.isEmpty() || match.playerTwo.isEmpty() || match.result.isEmpty()) {
+            member.firstName = binding.memberFirstName.text.toString()
+            member.lastName = binding.memberLastName.text.toString()
+            member.age = binding.memberAge.text.toString()
+            if (member.firstName.isEmpty() || member.lastName.isEmpty() || member.age.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {
-                    app.matches.update(match.copy())
+                    app.members.update(member.copy())
                 } else {
-                    app.matches.create(match.copy())
+                    app.members.create(member.copy())
                 }
             }
             setResult(RESULT_OK)

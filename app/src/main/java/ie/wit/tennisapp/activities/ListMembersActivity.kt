@@ -7,20 +7,20 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.databinding.ActivityResultsListBinding
+import ie.wit.tennisapp.databinding.ActivityListMembersBinding
 import ie.wit.tennisapp.main.MainApp
-import ie.wit.tennisapp.adapters.MatchAdapter
-import ie.wit.tennisapp.adapters.ResultsListener
-import ie.wit.tennisapp.models.MatchModel
+import ie.wit.tennisapp.adapters.MemberAdapter
+import ie.wit.tennisapp.adapters.MembersListener
+import ie.wit.tennisapp.models.MemberModel
 
-class ResultsListActivity : AppCompatActivity(), ResultsListener {
+class ListMembersActivity : AppCompatActivity(), MembersListener {
 
     lateinit var app: MainApp
-    private lateinit var binding: ActivityResultsListBinding
+    private lateinit var binding: ActivityListMembersBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityResultsListBinding.inflate(layoutInflater)
+        binding = ActivityListMembersBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
@@ -28,8 +28,13 @@ class ResultsListActivity : AppCompatActivity(), ResultsListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = MatchAdapter(app.matches.findAll(), this)
+        binding.recyclerView.adapter = MemberAdapter(app.members.findAll(), this)
         binding.toolbar.title = title
+
+        binding.btnAdd.setOnClickListener() {
+            val launcherIntent = Intent(this, AddMemberActivity::class.java)
+            startActivityForResult(launcherIntent, 0)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -37,24 +42,24 @@ class ResultsListActivity : AppCompatActivity(), ResultsListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_add -> {
-                val launcherIntent = Intent(this, AddResultActivity::class.java)
-                startActivityForResult(launcherIntent, 0)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onResultClick(result: MatchModel) {
+    override fun onMemberClick(member: MemberModel) {
         val launcherIntent = Intent(this, AddResultActivity::class.java)
-        launcherIntent.putExtra("result_edit", result)
+        launcherIntent.putExtra("member_edit", member)
         startActivityForResult(launcherIntent,0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         binding.recyclerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_view_results -> {
+                startActivity(Intent(this, ListResultsActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

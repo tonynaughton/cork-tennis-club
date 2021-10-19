@@ -1,11 +1,18 @@
 <resources>
-    <string name="app_name">Tennis App</string>
+    <string name="app_name">Cork Tennis Club</string>
     <string name="button_addMatchResult">Add Match Result</string>
+    <string name="button_addMember">Add Member</string>
     <string name="hint_matchResult">Result</string>
     <string name="hint_matchPlayerOne">Player 1</string>
     <string name="hint_matchPlayerTwo">Player 2</string>
     <string name="menu_addResult">Add</string>
     <string name="menu_cancelAddResult">Cancel</string>
+    <string name="menu_results">Results</string>
+    <string name="menu_members">Members</string>
     <string name="save_result">Update Result</string>
     <string name="fill_in_all_fields">Please fill in all fields</string>
+    <string name="splash_screen_title">Welcome to Cork Tennis Club!</string>
+    <string name="hint_memberFirstName">First name</string>
+    <string name="hint_memberLastName">Last name</string>
+    <string name="hint_memberAge">Age</string>
 </resources>

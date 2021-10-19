@@ -2,13 +2,13 @@ package ie.wit.tennisapp.models
 
 import timber.log.Timber.i
 
-var lastId = 0L
-
-internal fun getId(): Long {
-    return lastId++
-}
-
 class ResultsMemStore : ResultStore {
+
+    var lastId = 0L
+
+    private fun getId(): Long {
+        return lastId++
+    }
 
     private val results = ArrayList<MatchModel>()
 
