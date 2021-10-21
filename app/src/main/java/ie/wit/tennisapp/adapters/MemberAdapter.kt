@@ -3,7 +3,8 @@ package ie.wit.tennisapp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ie.wit.tennisapp.databinding.MemberResultBinding
+import com.squareup.picasso.Picasso
+import ie.wit.tennisapp.databinding.CardMemberBinding
 import ie.wit.tennisapp.models.MemberModel
 
 
@@ -16,7 +17,7 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
     RecyclerView.Adapter<MemberAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        val binding = MemberResultBinding
+        val binding = CardMemberBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
         return MainHolder(binding)
     }
@@ -28,13 +29,14 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
 
     override fun getItemCount(): Int = members.size
 
-    class MainHolder(private val binding : MemberResultBinding) :
+    class MainHolder(private val binding : CardMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(member: MemberModel, listener: MembersListener) {
             binding.memberFirstName.text = member.firstName
             binding.memberLastName.text = member.lastName
             binding.memberAge.text = member.age
+            Picasso.get().load(member.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onMemberClick(member) }
         }
     }

@@ -31,6 +31,7 @@ class MembersMemStore : MemberStore {
             foundMember.firstName = member.firstName
             foundMember.lastName = member.lastName
             foundMember.age = member.age
+            foundMember.image = member.image
             logAll()
         }
     }

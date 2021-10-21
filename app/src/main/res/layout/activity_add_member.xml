@@ -87,17 +87,36 @@
                     />
 
                 <Button
+                    android:id="@+id/chooseImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:padding="8dp"
+                    android:text="@string/button_addImage"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:layout_below="@id/memberAge"/>
+
+                <ImageView
+                    android:id="@+id/memberImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_below="@id/chooseImage"/>
+
+                <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_margin="16dp"
                     android:background="@color/colorAccent"
                     android:padding="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addMember"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    android:layout_below="@id/memberAge"
+                    android:layout_below="@id/memberImage"
                     />
             </RelativeLayout>
         </ScrollView>

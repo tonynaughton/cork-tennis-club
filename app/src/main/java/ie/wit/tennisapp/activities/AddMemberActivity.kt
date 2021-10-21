@@ -1,18 +1,26 @@
 package ie.wit.tennisapp.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityAddMemberBinding
+import ie.wit.tennisapp.helpers.showImagePicker
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
+import timber.log.Timber.i
 
 class AddMemberActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddMemberBinding
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     var member = MemberModel()
     lateinit var app: MainApp
 
@@ -24,6 +32,7 @@ class AddMemberActivity : AppCompatActivity() {
 
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
+        registerImagePickerCallback()
 
         app = application as MainApp
 
@@ -34,6 +43,12 @@ class AddMemberActivity : AppCompatActivity() {
             binding.memberLastName.setText(member.lastName)
             binding.memberAge.setText(member.age)
             binding.btnAdd.setText(R.string.save_result)
+            Picasso.get()
+                .load(member.image)
+                .into(binding.memberImage)
+            if (member.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_member_image)
+            }
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -54,6 +69,9 @@ class AddMemberActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,5 +86,25 @@ class AddMemberActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            member.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(member.image)
+                                .into(binding.memberImage)
+                            binding.chooseImage.setText(R.string.change_member_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }

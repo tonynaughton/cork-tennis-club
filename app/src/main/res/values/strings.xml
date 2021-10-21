@@ -15,4 +15,7 @@
     <string name="hint_memberFirstName">First name</string>
     <string name="hint_memberLastName">Last name</string>
     <string name="hint_memberAge">Age</string>
+    <string name="select_member_image">Select member image</string>
+    <string name="button_addImage">Add Image</string>
+    <string name="change_member_image">Change member image</string>
 </resources>
