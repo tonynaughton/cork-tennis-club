@@ -11,11 +11,12 @@
     <string name="menu_members">Members</string>
     <string name="save_result">Update Result</string>
     <string name="fill_in_all_fields">Please fill in all fields</string>
-    <string name="splash_screen_title">Welcome to Cork Tennis Club!</string>
+    <string name="home_title">Welcome to Cork Tennis Club!</string>
     <string name="hint_memberFirstName">First name</string>
     <string name="hint_memberLastName">Last name</string>
     <string name="hint_memberAge">Age</string>
     <string name="select_member_image">Select member image</string>
     <string name="button_addImage">Add Image</string>
     <string name="change_member_image">Change member image</string>
+    <string name="home_subtitle">Est. 2021</string>
 </resources>
