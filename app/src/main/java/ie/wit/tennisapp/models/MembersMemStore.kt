@@ -30,8 +30,9 @@ class MembersMemStore : MemberStore {
         if (foundMember != null) {
             foundMember.firstName = member.firstName
             foundMember.lastName = member.lastName
-            foundMember.age = member.age
+            foundMember.dob = member.dob
             foundMember.image = member.image
+            foundMember.experience = member.experience
             logAll()
         }
     }

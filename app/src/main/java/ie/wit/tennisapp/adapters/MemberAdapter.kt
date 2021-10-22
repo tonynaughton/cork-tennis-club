@@ -33,9 +33,9 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(member: MemberModel, listener: MembersListener) {
-            binding.memberFirstName.text = member.firstName
-            binding.memberLastName.text = member.lastName
-            binding.memberAge.text = member.age
+            binding.memberFullName.text = member.firstName + " " + member.lastName
+            binding.memberDob.text = member.dob
+            binding.memberExperience.text = member.experience
             Picasso.get().load(member.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onMemberClick(member) }
         }

@@ -11,39 +11,46 @@
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/change_member_image" />
+            android:contentDescription="@string/change_member_image"
+            android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/memberFirstName"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            tools:text="First name" />
+            android:orientation="vertical"
+            android:layout_weight="4">
 
-        <TextView
-            android:id="@+id/memberLastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            tools:text="Last name" />
+            <TextView
+                android:id="@+id/memberFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                tools:text="First name" />
 
-        <TextView
-            android:id="@+id/memberAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            tools:text="Age" />
+            <TextView
+                android:id="@+id/memberDob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12dp"
+                tools:text="D.O.B." />
+
+            <TextView
+                android:id="@+id/memberExperience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12dp"
+                tools:text="Experience" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

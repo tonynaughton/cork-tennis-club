@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.AddMemberActivity">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -29,16 +24,15 @@
                 app:titleTextColor="@color/colorPrimary" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/appBarLayout"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/memberFirstName"
@@ -52,8 +46,7 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    android:layout_alignParentStart="true"
-                    />
+                    android:layout_weight="1" />
 
                 <EditText
                     android:id="@+id/memberLastName"
@@ -67,59 +60,73 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    android:layout_below="@id/memberFirstName"
-                    />
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/memberAge"
+                    android:id="@+id/memberDob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:hint="@string/hint_memberAge"
+                    android:hint="@string/hint_memberDob"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    android:layout_below="@id/memberLastName"
-                    android:layout_alignParentEnd="true"
-                    />
+                    android:layout_weight="1"/>
 
-                <Button
-                    android:id="@+id/chooseImage"
+                <EditText
+                    android:id="@+id/memberExperience"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_memberExperience"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
                     android:padding="8dp"
-                    android:text="@string/button_addImage"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:layout_below="@id/memberAge"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp"
+                    android:layout_weight="1"/>
 
-                <ImageView
-                    android:id="@+id/memberImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
-                    android:layout_below="@id/chooseImage"/>
+            </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:padding="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_addMember"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:layout_below="@id/memberImage"
-                    />
-            </RelativeLayout>
-        </ScrollView>
+            <Button
+                android:id="@+id/chooseImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/colorAccent"
+                android:padding="8dp"
+                android:text="@string/button_addImage"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
 
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/memberImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/colorAccent"
+                android:padding="8dp"
+                android:stateListAnimator="@null"
+                android:text="@string/button_addMember"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+</LinearLayout>

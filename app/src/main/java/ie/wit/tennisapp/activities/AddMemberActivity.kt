@@ -41,7 +41,8 @@ class AddMemberActivity : AppCompatActivity() {
             member = intent.extras?.getParcelable("member_edit")!!
             binding.memberFirstName.setText(member.firstName)
             binding.memberLastName.setText(member.lastName)
-            binding.memberAge.setText(member.age)
+            binding.memberDob.setText(member.dob)
+            binding.memberExperience.setText(member.experience)
             binding.btnAdd.setText(R.string.save_result)
             Picasso.get()
                 .load(member.image)
@@ -54,8 +55,9 @@ class AddMemberActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             member.firstName = binding.memberFirstName.text.toString()
             member.lastName = binding.memberLastName.text.toString()
-            member.age = binding.memberAge.text.toString()
-            if (member.firstName.isEmpty() || member.lastName.isEmpty() || member.age.isEmpty()) {
+            member.dob = binding.memberDob.text.toString()
+            member.experience = binding.memberExperience.text.toString()
+            if (member.firstName.isEmpty() || member.lastName.isEmpty() || member.dob.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
