@@ -19,8 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:fitsSystemWindows="true"
-            app:elevation="0dip"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:elevation="0dip">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarAdd"

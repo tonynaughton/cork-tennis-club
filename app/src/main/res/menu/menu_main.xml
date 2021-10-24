@@ -5,10 +5,15 @@
     <item
         android:id="@+id/item_view_results"
         android:title="@string/menu_results"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/item_view_members"
         android:title="@string/menu_members"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item_contact"
+        android:title="@string/menu_contact"
+        app:showAsAction="never" />
 </menu>

@@ -5,22 +5,46 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import ie.wit.tennisapp.R
-import ie.wit.tennisapp.databinding.ActivityHomeBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import ie.wit.tennisapp.databinding.ActivityContactBinding
 import ie.wit.tennisapp.main.MainApp
 
-class HomeActivity: AppCompatActivity() {
+import com.google.android.gms.maps.SupportMapFragment
+import ie.wit.tennisapp.R
+import com.google.android.gms.maps.model.LatLng
+
+import com.google.android.gms.maps.model.MarkerOptions
+
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+
+class ContactActivity: AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var app: MainApp
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityContactBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+
+        binding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.mapView) as? SupportMapFragment
+        mapFragment?.getMapAsync(this)
+
         app = application as MainApp
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        val location = LatLng(51.87924593836583, -8.535871569744797)
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(location)
+                .title("Marker")
+        )
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(location))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
