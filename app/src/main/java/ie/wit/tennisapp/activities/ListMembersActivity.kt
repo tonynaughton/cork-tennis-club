@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityListMembersBinding
@@ -17,6 +19,7 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityListMembersBinding
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,9 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
             val launcherIntent = Intent(this, AddMemberActivity::class.java)
             startActivityForResult(launcherIntent, 0)
         }
+        loadMembers()
+
+        registerRefreshCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,7 +51,13 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
     override fun onMemberClick(member: MemberModel) {
         val launcherIntent = Intent(this, AddResultActivity::class.java)
         launcherIntent.putExtra("member_edit", member)
-        startActivityForResult(launcherIntent,0)
+        refreshIntentLauncher.launch(launcherIntent)
+    }
+
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { loadMembers() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -61,5 +73,14 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun loadMembers() {
+        showMembers(app.members.findAll())
+    }
+
+    fun showMembers(members: List<MemberModel>) {
+        binding.recyclerView.adapter = MemberAdapter(members, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
