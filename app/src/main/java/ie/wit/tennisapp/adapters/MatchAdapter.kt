@@ -6,12 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.wit.tennisapp.databinding.CardResultBinding
 import ie.wit.tennisapp.models.MatchModel
 
-interface ResultsListener {
-    fun onResultClick(result: MatchModel)
-}
-
-class MatchAdapter constructor(private var results: List<MatchModel>,
-                               private val listener: ResultsListener) :
+class MatchAdapter constructor(private var results: List<MatchModel>) :
     RecyclerView.Adapter<MatchAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -22,7 +17,7 @@ class MatchAdapter constructor(private var results: List<MatchModel>,
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val result = results[holder.adapterPosition]
-        holder.bind(result, listener)
+        holder.bind(result)
     }
 
     override fun getItemCount(): Int = results.size
@@ -30,11 +25,10 @@ class MatchAdapter constructor(private var results: List<MatchModel>,
     class MainHolder(private val binding : CardResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(match: MatchModel, listener: ResultsListener) {
+        fun bind(match: MatchModel) {
             binding.matchPlayerOne.text = match.playerOne
             binding.matchPlayerTwo.text = match.playerTwo
             binding.matchResult.text = match.result
-            binding.root.setOnClickListener { listener.onResultClick(match) }
         }
     }
 }

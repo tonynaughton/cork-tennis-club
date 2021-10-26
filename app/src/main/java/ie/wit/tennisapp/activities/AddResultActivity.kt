@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityAddResultBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MatchModel
+import ie.wit.tennisapp.models.MemberModel
 
 class AddResultActivity : AppCompatActivity() {
 
@@ -18,7 +23,6 @@ class AddResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var edit = false
         binding = ActivityAddResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,29 +31,43 @@ class AddResultActivity : AppCompatActivity() {
 
         app = application as MainApp
 
-        if (intent.hasExtra("result_edit")) {
-            edit = true
-            match = intent.extras?.getParcelable("result_edit")!!
-            binding.matchPlayerOne.setText(match.playerOne)
-            binding.matchPlayerTwo.setText(match.playerTwo)
-            binding.matchResult.setText(match.result)
-            binding.btnAdd.setText(R.string.save_result)
+        val allMembers = app.members.findAll()
+        var memberNames: MutableList<String> = mutableListOf()
+        memberNames = allMembers.map{it.firstName + " " + it.lastName} as MutableList<String>
+        val playerOneSpinner = findViewById<Spinner>(R.id.playerOneSpinner)
+        val playerTwoSpinner = findViewById<Spinner>(R.id.playerTwoSpinner)
+        if (playerOneSpinner != null && playerTwoSpinner != null) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, memberNames)
+            playerOneSpinner.adapter = adapter
+            playerTwoSpinner.adapter = adapter
+        }
+
+        playerOneSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                match.playerOne = memberNames[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        playerTwoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                match.playerTwo = memberNames[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         binding.btnAdd.setOnClickListener() {
-            match.playerOne = binding.matchPlayerOne.text.toString()
-            match.playerTwo = binding.matchPlayerTwo.text.toString()
-            match.result = binding.matchResult.text.toString()
+            val p1score = binding.playerOneScore.text.toString()
+            val p2score = binding.playerTwoScore.text.toString()
+            match.result = "$p1score - $p2score"
             if (match.playerOne.isEmpty() || match.playerTwo.isEmpty() || match.result.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                if (edit) {
-                    app.matches.update(match.copy())
-                } else {
-                    app.matches.create(match.copy())
-                }
+                app.matches.create(match.copy())
             }
             setResult(RESULT_OK)
             finish()

@@ -26,4 +26,10 @@
     <string name="contact_location">Cork Tennis Club, Bishopstown, Cork</string>
     <string name="contact_title">Get in touch!</string>
     <string name="title_activity_map">Map</string>
+    <string name="player_one_spinner_label">Player 1:</string>
+    <string name="player_two_spinner_label">Player 2:</string>
+    <string name="result_edit_text_label">Result:</string>
+    <string name="P1_hint">P1</string>
+    <string name="dash">-</string>
+    <string name="P2_hint">P2</string>
 </resources>
