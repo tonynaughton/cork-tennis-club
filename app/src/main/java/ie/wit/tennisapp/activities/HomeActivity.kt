@@ -20,26 +20,30 @@ class HomeActivity: AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        binding.loginButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+        binding.registerButton.setOnClickListener {
+            startActivity(Intent(this, AddMemberActivity::class.java))
+        }
+
         app = application as MainApp
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_home, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.item_view_results -> {
-                startActivity(Intent(this, ListResultsActivity::class.java))
+            R.id.item_login -> {
+                startActivity(Intent(this, LoginActivity::class.java))
                 true
             }
-            R.id.item_view_members -> {
-                startActivity(Intent(this, ListMembersActivity::class.java))
-                true
-            }
-            R.id.item_contact -> {
-                startActivity(Intent(this, ContactActivity::class.java))
+            R.id.item_register -> {
+                startActivity(Intent(this, AddMemberActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

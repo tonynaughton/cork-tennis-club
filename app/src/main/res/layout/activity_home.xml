@@ -36,13 +36,49 @@
                 app:srcCompat="@drawable/tennis_court"
                 android:alpha="0.35"/>
 
-            <ImageView
-                android:id="@+id/homeImage"
-                android:layout_width="300dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                app:srcCompat="@drawable/cork_tennis_club_logo" />
+                android:layout_marginBottom="30dp">
+
+                <ImageView
+                    android:id="@+id/homeImage"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/cork_tennis_club_logo" />
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/loginButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/login"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/gray"/>
+
+                    <Button
+                        android:id="@+id/registerButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/register"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/gray"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </FrameLayout>
 </LinearLayout>

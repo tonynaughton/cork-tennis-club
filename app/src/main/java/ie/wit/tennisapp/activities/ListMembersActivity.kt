@@ -94,6 +94,10 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
                 startActivity(Intent(this, ContactActivity::class.java))
                 true
             }
+            R.id.item_contact -> {
+                startActivity(Intent(this, HomeActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

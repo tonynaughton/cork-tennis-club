@@ -8,13 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import ie.wit.tennisapp.databinding.ActivityContactBinding
 import ie.wit.tennisapp.main.MainApp
-
 import com.google.android.gms.maps.SupportMapFragment
 import ie.wit.tennisapp.R
 import com.google.android.gms.maps.model.LatLng
-
 import com.google.android.gms.maps.model.MarkerOptions
-
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 
@@ -64,6 +61,10 @@ class ContactActivity: AppCompatActivity(), OnMapReadyCallback {
             }
             R.id.item_contact -> {
                 startActivity(Intent(this, ContactActivity::class.java))
+                true
+            }
+            R.id.item_contact -> {
+                startActivity(Intent(this, HomeActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

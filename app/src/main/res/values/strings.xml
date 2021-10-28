@@ -39,4 +39,11 @@
     <string name="select_a_member">Please select a member from the dropdown</string>
     <string name="add_result_players_label">Players:</string>
     <string name="add_result_score_label">Score:</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="hint_emailAddress">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="menu_logout">Logout</string>
+    <string name="user_does_not_exist">Incorrect email and/or password</string>
+    <string name="login_successful">Login Successful!</string>
 </resources>

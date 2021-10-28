@@ -9,6 +9,7 @@
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_contact.xml" value="0.1" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_home.xml" value="0.27807971014492755" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_list_members.xml" value="0.3958333333333333" />
+        <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_login.xml" value="0.5541666666666667" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_map.xml" value="0.2692502532928065" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_results.xml" value="0.3307291666666667" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/activity_results_list.xml" value="0.3307291666666667" />
@@ -18,6 +19,7 @@
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/layout/member_result.xml" value="0.3958333333333333" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/menu/menu_add_result.xml" value="0.1" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/menu/menu_cancel.xml" value="0.3307291666666667" />
+        <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/menu/menu_home.xml" value="0.5541666666666667" />
         <entry key="..\:/hdip-cs/mobile-app-dev/tennis-app/app/src/main/res/menu/menu_main.xml" value="0.30512820512820515" />
       </map>
     </option>
