@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityListMembersBinding
@@ -47,10 +48,25 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onMemberClick(member: MemberModel) {
+    override fun onEditMemberClick(member: MemberModel) {
         val launcherIntent = Intent(this, AddMemberActivity::class.java)
         launcherIntent.putExtra("member_edit", member)
         refreshIntentLauncher.launch(launcherIntent)
+    }
+
+    override fun onDeleteMemberClick(member: MemberModel) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure you want to delete this member?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { _, _ ->
+                app.members.delete(member)
+                binding.recyclerView.adapter?.notifyDataSetChanged()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 
     private fun registerRefreshCallback() {

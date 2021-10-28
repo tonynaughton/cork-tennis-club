@@ -7,9 +7,9 @@ import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.databinding.CardMemberBinding
 import ie.wit.tennisapp.models.MemberModel
 
-
 interface MembersListener {
-    fun onMemberClick(member: MemberModel)
+    fun onEditMemberClick(member: MemberModel)
+    fun onDeleteMemberClick(member: MemberModel)
 }
 
 class MemberAdapter constructor(private var members: List<MemberModel>,
@@ -37,7 +37,8 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
             binding.memberDob.text = member.dob
             binding.memberExperience.text = member.experience
             Picasso.get().load(member.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onMemberClick(member) }
+            binding.editButton.setOnClickListener { listener.onEditMemberClick(member) }
+            binding.deleteButton.setOnClickListener { listener.onDeleteMemberClick(member) }
         }
     }
 }
