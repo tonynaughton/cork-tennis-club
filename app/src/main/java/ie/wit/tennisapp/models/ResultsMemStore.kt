@@ -28,10 +28,13 @@ class ResultsMemStore : ResultStore {
         if (foundResult != null) {
             foundResult.playerOne = result.playerOne
             foundResult.playerTwo = result.playerTwo
-            foundResult.score = result.score
+            foundResult.p1Score = result.p1Score
+            foundResult.p2Score = result.p2Score
             logAll()
         }
     }
+
+    override fun delete(result: ResultModel) {}
 
     private fun logAll() {
         results.forEach{ i("$it") }

@@ -33,4 +33,7 @@
     <string name="dash">-</string>
     <string name="P2_hint">P2</string>
     <string name="update_result">Update Result</string>
+    <string name="edit_label">EDIT</string>
+    <string name="delete_label">DELETE</string>
+    <string name="update_member">Update Member</string>
 </resources>

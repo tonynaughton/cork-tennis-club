@@ -49,6 +49,11 @@ class ResultJSONStore(private val context: Context) : ResultStore {
         serialize()
     }
 
+    override fun delete(result: ResultModel) {
+        results.remove(result)
+        serialize()
+    }
+
     private fun serialize() {
         val jsonString = resultsGsonBuilder.toJson(results, resultsListType)
         write(context, RESULTS_JSON_FILE, jsonString)

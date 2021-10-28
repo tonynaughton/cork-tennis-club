@@ -49,6 +49,11 @@ class MemberJSONStore(private val context: Context) : MemberStore {
         serialize()
     }
 
+    override fun delete(member: MemberModel) {
+        members.remove(member)
+        serialize()
+    }
+
     private fun serialize() {
         val jsonString = membersGsonBuilder.toJson(members, membersListType)
         write(context, MEMBERS_JSON_FILE, jsonString)

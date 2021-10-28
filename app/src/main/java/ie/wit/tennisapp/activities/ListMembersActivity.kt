@@ -70,6 +70,14 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
                 startActivity(Intent(this, ListResultsActivity::class.java))
                 true
             }
+            R.id.item_view_members -> {
+                startActivity(Intent(this, ListMembersActivity::class.java))
+                true
+            }
+            R.id.item_contact -> {
+                startActivity(Intent(this, ContactActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

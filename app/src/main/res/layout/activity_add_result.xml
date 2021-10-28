@@ -121,6 +121,5 @@
         android:text="@string/button_addResult"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
-        android:layout_below="@id/resultScore"
         />
 </LinearLayout>

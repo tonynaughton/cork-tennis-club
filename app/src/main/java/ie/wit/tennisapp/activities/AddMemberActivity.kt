@@ -43,7 +43,7 @@ class AddMemberActivity : AppCompatActivity() {
             binding.memberLastName.setText(member.lastName)
             binding.memberDob.setText(member.dob)
             binding.memberExperience.setText(member.experience)
-            binding.btnAdd.setText(R.string.save_result)
+            binding.btnAdd.setText(R.string.update_member)
             Picasso.get()
                 .load(member.image)
                 .into(binding.memberImage)
@@ -57,7 +57,7 @@ class AddMemberActivity : AppCompatActivity() {
             member.lastName = binding.memberLastName.text.toString()
             member.dob = binding.memberDob.text.toString()
             member.experience = binding.memberExperience.text.toString()
-            if (member.firstName.isEmpty() || member.lastName.isEmpty() || member.dob.isEmpty()) {
+            if (member.firstName.isEmpty() || member.lastName.isEmpty() || member.dob.isEmpty() || member.experience.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
@@ -103,7 +103,7 @@ class AddMemberActivity : AppCompatActivity() {
                                 .load(member.image)
                                 .into(binding.memberImage)
                             binding.chooseImage.setText(R.string.change_member_image)
-                        } // end of if
+                        }
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }

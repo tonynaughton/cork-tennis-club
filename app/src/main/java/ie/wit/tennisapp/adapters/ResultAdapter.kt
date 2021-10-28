@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.tennisapp.databinding.CardResultBinding
-import ie.wit.tennisapp.models.MemberModel
 import ie.wit.tennisapp.models.ResultModel
 
 interface ResultsListener {
-    fun onResultClick(result: ResultModel)
+    fun onEditResultClick(result: ResultModel)
+    fun onDeleteResultClick(result: ResultModel)
 }
 
 class ResultAdapter constructor(private var results: List<ResultModel>,
@@ -34,8 +34,10 @@ class ResultAdapter constructor(private var results: List<ResultModel>,
         fun bind(result: ResultModel, listener: ResultsListener) {
             binding.resultPlayerOne.text = result.playerOne
             binding.resultPlayerTwo.text = result.playerTwo
-            binding.resultScore.text = result.score
-            binding.root.setOnClickListener { listener.onResultClick(result) }
+            binding.resultPlayerOneScore.text = result.p1Score.toString()
+            binding.resultPlayerTwoScore.text = result.p2Score.toString()
+            binding.editButton.setOnClickListener { listener.onEditResultClick(result) }
+            binding.deleteButton.setOnClickListener { listener.onDeleteResultClick(result) }
         }
     }
 }

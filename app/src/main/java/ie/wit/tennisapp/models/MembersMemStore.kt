@@ -37,6 +37,8 @@ class MembersMemStore : MemberStore {
         }
     }
 
+    override fun delete(member: MemberModel) {}
+
     private fun logAll() {
         results.forEach{ i("$it") }
     }

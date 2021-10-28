@@ -10,4 +10,6 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#85D34D</color>
+    <color name="editButton">#FF4D94D3</color>
+    <color name="deleteButton">#CF2323</color>
 </resources>

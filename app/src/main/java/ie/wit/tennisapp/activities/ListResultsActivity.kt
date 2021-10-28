@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityResultsListBinding
@@ -47,10 +48,25 @@ class ListResultsActivity : AppCompatActivity(), ResultsListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onResultClick(result: ResultModel) {
+    override fun onEditResultClick(result: ResultModel) {
         val launcherIntent = Intent(this, AddResultActivity::class.java)
         launcherIntent.putExtra("result_edit", result)
         refreshIntentLauncher.launch(launcherIntent)
+    }
+
+    override fun onDeleteResultClick(result: ResultModel) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure you want to delete this result?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { _, _ ->
+                app.results.delete(result)
+                binding.recyclerView.adapter?.notifyDataSetChanged()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 
     private fun registerRefreshCallback() {
@@ -66,8 +82,16 @@ class ListResultsActivity : AppCompatActivity(), ResultsListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.item_view_results -> {
+                startActivity(Intent(this, ListResultsActivity::class.java))
+                true
+            }
             R.id.item_view_members -> {
                 startActivity(Intent(this, ListMembersActivity::class.java))
+                true
+            }
+            R.id.item_contact -> {
+                startActivity(Intent(this, ContactActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

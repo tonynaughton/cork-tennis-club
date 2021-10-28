@@ -49,9 +49,8 @@ class AddResultActivity : AppCompatActivity() {
             result = intent.extras?.getParcelable("result_edit")!!
             binding.playerOneSpinner.setSelection(memberNames.indexOf(result.playerOne))
             binding.playerTwoSpinner.setSelection(memberNames.indexOf(result.playerTwo))
-            var scores = result.score.split(" - ")
-            binding.playerOneScore.setText(scores[0])
-            binding.playerTwoScore.setText(scores[1])
+            binding.playerOneScore.setText(result.p1Score.toString())
+            binding.playerTwoScore.setText(result.p2Score.toString())
             binding.btnAdd.setText(R.string.update_result)
         }
 
@@ -72,10 +71,9 @@ class AddResultActivity : AppCompatActivity() {
         }
 
         binding.btnAdd.setOnClickListener() {
-            val p1score = binding.playerOneScore.text.toString()
-            val p2score = binding.playerTwoScore.text.toString()
-            result.score = "$p1score - $p2score"
-            if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.score.isEmpty()) {
+            result.p1Score = binding.playerOneScore.text.toString().toInt()
+            result.p2Score = binding.playerTwoScore.text.toString().toInt()
+            if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.p1Score.toString().isEmpty() || result.p2Score.toString().isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()

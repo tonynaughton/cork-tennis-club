@@ -4,4 +4,5 @@ interface ResultStore {
     fun findAll(): List<ResultModel>
     fun create(result: ResultModel)
     fun update(result: ResultModel)
+    fun delete(result: ResultModel)
 }
