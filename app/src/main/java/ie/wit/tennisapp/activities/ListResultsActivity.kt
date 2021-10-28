@@ -13,7 +13,6 @@ import ie.wit.tennisapp.databinding.ActivityResultsListBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.adapters.ResultAdapter
 import ie.wit.tennisapp.adapters.ResultsListener
-import ie.wit.tennisapp.models.MemberModel
 import ie.wit.tennisapp.models.ResultModel
 
 class ListResultsActivity : AppCompatActivity(), ResultsListener {

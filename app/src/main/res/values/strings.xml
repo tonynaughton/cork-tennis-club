@@ -32,4 +32,5 @@
     <string name="P1_hint">P1</string>
     <string name="dash">-</string>
     <string name="P2_hint">P2</string>
+    <string name="update_result">Update Result</string>
 </resources>

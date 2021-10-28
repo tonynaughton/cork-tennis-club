@@ -42,7 +42,11 @@ class MemberJSONStore(private val context: Context) : MemberStore {
 
 
     override fun update(member: MemberModel) {
-        // todo
+        val currentMember: MemberModel? = members.find { it.id == member.id }
+        if (currentMember != null) {
+            members[members.indexOf(currentMember)] = member
+        }
+        serialize()
     }
 
     private fun serialize() {

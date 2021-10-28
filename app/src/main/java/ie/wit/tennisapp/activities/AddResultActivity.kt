@@ -47,13 +47,12 @@ class AddResultActivity : AppCompatActivity() {
         if (intent.hasExtra("result_edit")) {
             edit = true
             result = intent.extras?.getParcelable("result_edit")!!
-            println("NAME POSITION: " + memberNames.indexOf(result.playerOne))
             binding.playerOneSpinner.setSelection(memberNames.indexOf(result.playerOne))
             binding.playerTwoSpinner.setSelection(memberNames.indexOf(result.playerTwo))
-            var scores = result.score.split("-")
+            var scores = result.score.split(" - ")
             binding.playerOneScore.setText(scores[0])
             binding.playerTwoScore.setText(scores[1])
-            binding.btnAdd.setText(R.string.save_result)
+            binding.btnAdd.setText(R.string.update_result)
         }
 
         playerOneSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -75,7 +74,7 @@ class AddResultActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             val p1score = binding.playerOneScore.text.toString()
             val p2score = binding.playerTwoScore.text.toString()
-            result.score = "$p1score-$p2score"
+            result.score = "$p1score - $p2score"
             if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.score.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)

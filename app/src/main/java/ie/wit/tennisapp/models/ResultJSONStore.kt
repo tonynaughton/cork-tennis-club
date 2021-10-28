@@ -42,7 +42,11 @@ class ResultJSONStore(private val context: Context) : ResultStore {
 
 
     override fun update(result: ResultModel) {
-        // todo
+        val currentResult: ResultModel? = results.find { it.id == result.id }
+        if (currentResult != null) {
+            results[results.indexOf(currentResult)] = result
+        }
+        serialize()
     }
 
     private fun serialize() {
