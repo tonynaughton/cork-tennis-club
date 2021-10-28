@@ -9,22 +9,22 @@ import timber.log.Timber
 import java.lang.reflect.Type
 import java.util.*
 
-const val JSON_FILE = "members.json"
-val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
-    .registerTypeAdapter(Uri::class.java, UriParser())
+const val MEMBERS_JSON_FILE = "members.json"
+val membersGsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
+    .registerTypeAdapter(Uri::class.java, MemberUriParser())
     .create()
-val listType: Type = object : TypeToken<ArrayList<MemberModel>>() {}.type
+val membersListType: Type = object : TypeToken<ArrayList<MemberModel>>() {}.type
 
-fun generateRandomId(): Long {
+fun generateRandomMemberId(): Long {
     return Random().nextLong()
 }
 
 class MemberJSONStore(private val context: Context) : MemberStore {
 
-    var members = mutableListOf<MemberModel>()
+    private var members = mutableListOf<MemberModel>()
 
     init {
-        if (exists(context, JSON_FILE)) {
+        if (exists(context, MEMBERS_JSON_FILE)) {
             deserialize()
         }
     }
@@ -35,7 +35,7 @@ class MemberJSONStore(private val context: Context) : MemberStore {
     }
 
     override fun create(member: MemberModel) {
-        member.id = generateRandomId()
+        member.id = generateRandomMemberId()
         members.add(member)
         serialize()
     }
@@ -46,13 +46,13 @@ class MemberJSONStore(private val context: Context) : MemberStore {
     }
 
     private fun serialize() {
-        val jsonString = gsonBuilder.toJson(members, listType)
-        write(context, JSON_FILE, jsonString)
+        val jsonString = membersGsonBuilder.toJson(members, membersListType)
+        write(context, MEMBERS_JSON_FILE, jsonString)
     }
 
     private fun deserialize() {
-        val jsonString = read(context, JSON_FILE)
-        members = gsonBuilder.fromJson(jsonString, listType)
+        val jsonString = read(context, MEMBERS_JSON_FILE)
+        members = membersGsonBuilder.fromJson(jsonString, membersListType)
     }
 
     private fun logAll() {
@@ -60,7 +60,7 @@ class MemberJSONStore(private val context: Context) : MemberStore {
     }
 }
 
-class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
+class MemberUriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,

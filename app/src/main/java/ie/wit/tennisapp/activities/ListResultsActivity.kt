@@ -5,16 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
+import ie.wit.tennisapp.adapters.MemberAdapter
 import ie.wit.tennisapp.databinding.ActivityResultsListBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.adapters.ResultAdapter
+import ie.wit.tennisapp.models.MemberModel
+import ie.wit.tennisapp.models.ResultModel
 
 class ListResultsActivity : AppCompatActivity() {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityResultsListBinding
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +39,8 @@ class ListResultsActivity : AppCompatActivity() {
             val launcherIntent = Intent(this, AddResultActivity::class.java)
             startActivityForResult(launcherIntent, 0)
         }
+        loadResults()
+        registerRefreshCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,6 +53,12 @@ class ListResultsActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { loadResults() }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_view_members -> {
@@ -53,5 +67,14 @@ class ListResultsActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun loadResults() {
+        showResults(app.results.findAll())
+    }
+
+    private fun showResults (results: List<ResultModel>) {
+        binding.recyclerView.adapter = ResultAdapter(results)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
