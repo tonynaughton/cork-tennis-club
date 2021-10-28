@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MatchModel(
+data class ResultModel(
     var id: Long = 0,
     var playerOne: String = "",
     var playerTwo: String = "",

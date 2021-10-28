@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Cork Tennis Club</string>
-    <string name="button_addMatchResult">Add Match Result</string>
+    <string name="button_addResult">Add Match Result</string>
     <string name="button_addMember">Add Member</string>
-    <string name="hint_matchResult">Result</string>
-    <string name="hint_matchPlayerOne">Player 1</string>
-    <string name="hint_matchPlayerTwo">Player 2</string>
+    <string name="hint_resultScore">Result</string>
+    <string name="hint_resultPlayerOne">Player 1</string>
+    <string name="hint_resultPlayerTwo">Player 2</string>
     <string name="menu_addResult">Add</string>
     <string name="menu_cancelAddResult">Cancel</string>
     <string name="menu_results">Results</string>

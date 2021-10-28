@@ -7,13 +7,13 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    lateinit var matches: ResultStore
+    lateinit var results: ResultStore
     lateinit var members: MemberStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        matches = ResultsMemStore()
+        results = ResultsMemStore()
         members = MemberJSONStore(applicationContext)
         i("Tennis App started")
     }

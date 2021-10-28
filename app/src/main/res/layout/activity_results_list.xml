@@ -48,7 +48,7 @@
                     android:background="@color/colorAccent"
                     android:padding="8dp"
                     android:stateListAnimator="@null"
-                    android:text="@string/button_addMatchResult"
+                    android:text="@string/button_addResult"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp" />
 

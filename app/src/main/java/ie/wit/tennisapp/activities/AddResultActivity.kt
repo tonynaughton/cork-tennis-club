@@ -12,13 +12,12 @@ import com.google.android.material.snackbar.Snackbar
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityAddResultBinding
 import ie.wit.tennisapp.main.MainApp
-import ie.wit.tennisapp.models.MatchModel
-import ie.wit.tennisapp.models.MemberModel
+import ie.wit.tennisapp.models.ResultModel
 
 class AddResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddResultBinding
-    var match = MatchModel()
+    var result = ResultModel()
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class AddResultActivity : AppCompatActivity() {
 
         playerOneSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                match.playerOne = memberNames[position]
+                result.playerOne = memberNames[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -52,7 +51,7 @@ class AddResultActivity : AppCompatActivity() {
 
         playerTwoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                match.playerTwo = memberNames[position]
+                result.playerTwo = memberNames[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -61,13 +60,13 @@ class AddResultActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             val p1score = binding.playerOneScore.text.toString()
             val p2score = binding.playerTwoScore.text.toString()
-            match.result = "$p1score - $p2score"
-            if (match.playerOne.isEmpty() || match.playerTwo.isEmpty() || match.result.isEmpty()) {
+            result.result = "$p1score - $p2score"
+            if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.result.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                app.matches.create(match.copy())
+                app.results.create(result.copy())
             }
             setResult(RESULT_OK)
             finish()

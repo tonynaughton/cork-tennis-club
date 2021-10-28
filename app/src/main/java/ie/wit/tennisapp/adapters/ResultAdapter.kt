@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.tennisapp.databinding.CardResultBinding
-import ie.wit.tennisapp.models.MatchModel
+import ie.wit.tennisapp.models.ResultModel
 
-class MatchAdapter constructor(private var results: List<MatchModel>) :
-    RecyclerView.Adapter<MatchAdapter.MainHolder>() {
+class ResultAdapter constructor(private var results: List<ResultModel>) :
+    RecyclerView.Adapter<ResultAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardResultBinding
@@ -25,10 +25,10 @@ class MatchAdapter constructor(private var results: List<MatchModel>) :
     class MainHolder(private val binding : CardResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(match: MatchModel) {
-            binding.matchPlayerOne.text = match.playerOne
-            binding.matchPlayerTwo.text = match.playerTwo
-            binding.matchResult.text = match.result
+        fun bind(result: ResultModel) {
+            binding.resultPlayerOne.text = result.playerOne
+            binding.resultPlayerTwo.text = result.playerTwo
+            binding.resultScore.text = result.result
         }
     }
 }

@@ -118,9 +118,9 @@
         android:background="@color/colorAccent"
         android:padding="8dp"
         android:stateListAnimator="@null"
-        android:text="@string/button_addMatchResult"
+        android:text="@string/button_addResult"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
-        android:layout_below="@id/matchResult"
+        android:layout_below="@id/resultScore"
         />
 </LinearLayout>

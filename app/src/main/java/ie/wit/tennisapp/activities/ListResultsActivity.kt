@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityResultsListBinding
 import ie.wit.tennisapp.main.MainApp
-import ie.wit.tennisapp.adapters.MatchAdapter
+import ie.wit.tennisapp.adapters.ResultAdapter
 
 class ListResultsActivity : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class ListResultsActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = MatchAdapter(app.matches.findAll())
+        binding.recyclerView.adapter = ResultAdapter(app.results.findAll())
         binding.toolbar.title = title
 
         binding.btnAdd.setOnClickListener() {

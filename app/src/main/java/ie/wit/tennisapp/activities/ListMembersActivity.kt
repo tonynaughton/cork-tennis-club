@@ -79,7 +79,7 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
         showMembers(app.members.findAll())
     }
 
-    fun showMembers(members: List<MemberModel>) {
+    private fun showMembers(members: List<MemberModel>) {
         binding.recyclerView.adapter = MemberAdapter(members, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }

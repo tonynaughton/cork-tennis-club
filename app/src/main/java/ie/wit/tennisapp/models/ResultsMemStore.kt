@@ -10,20 +10,20 @@ class ResultsMemStore : ResultStore {
         return lastId++
     }
 
-    private val results = ArrayList<MatchModel>()
+    private val results = ArrayList<ResultModel>()
 
-    override fun findAll(): List<MatchModel> {
+    override fun findAll(): List<ResultModel> {
         return results
     }
 
-    override fun create(result: MatchModel) {
+    override fun create(result: ResultModel) {
         result.id = getId()
         results.add(result)
         logAll()
     }
 
-    override fun update(result: MatchModel) {
-        var foundResult: MatchModel? = results.find { p -> p.id == result.id }
+    override fun update(result: ResultModel) {
+        var foundResult: ResultModel? = results.find { p -> p.id == result.id }
         println(foundResult)
         if (foundResult != null) {
             foundResult.playerOne = result.playerOne
