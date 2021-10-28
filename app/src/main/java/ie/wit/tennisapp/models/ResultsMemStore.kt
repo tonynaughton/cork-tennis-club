@@ -28,7 +28,7 @@ class ResultsMemStore : ResultStore {
         if (foundResult != null) {
             foundResult.playerOne = result.playerOne
             foundResult.playerTwo = result.playerTwo
-            foundResult.result = result.result
+            foundResult.score = result.score
             logAll()
         }
     }

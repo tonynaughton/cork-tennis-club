@@ -9,14 +9,14 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.adapters.MemberAdapter
 import ie.wit.tennisapp.databinding.ActivityResultsListBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.adapters.ResultAdapter
+import ie.wit.tennisapp.adapters.ResultsListener
 import ie.wit.tennisapp.models.MemberModel
 import ie.wit.tennisapp.models.ResultModel
 
-class ListResultsActivity : AppCompatActivity() {
+class ListResultsActivity : AppCompatActivity(), ResultsListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityResultsListBinding
@@ -32,7 +32,7 @@ class ListResultsActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ResultAdapter(app.results.findAll())
+        binding.recyclerView.adapter = ResultAdapter(app.results.findAll(), this)
         binding.toolbar.title = title
 
         binding.btnAdd.setOnClickListener() {
@@ -48,15 +48,21 @@ class ListResultsActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onResultClick(result: ResultModel) {
+        val launcherIntent = Intent(this, AddResultActivity::class.java)
+        launcherIntent.putExtra("result_edit", result)
+        refreshIntentLauncher.launch(launcherIntent)
     }
 
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { loadResults() }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -74,7 +80,7 @@ class ListResultsActivity : AppCompatActivity() {
     }
 
     private fun showResults (results: List<ResultModel>) {
-        binding.recyclerView.adapter = ResultAdapter(results)
+        binding.recyclerView.adapter = ResultAdapter(results, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

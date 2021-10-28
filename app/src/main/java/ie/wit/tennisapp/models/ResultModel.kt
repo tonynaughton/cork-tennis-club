@@ -8,5 +8,5 @@ data class ResultModel(
     var id: Long = 0,
     var playerOne: String = "",
     var playerTwo: String = "",
-    var result: String = ""
+    var score: String = ""
 ) : Parcelable

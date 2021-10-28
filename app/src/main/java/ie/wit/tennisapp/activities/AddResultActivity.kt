@@ -1,5 +1,6 @@
 package ie.wit.tennisapp.activities
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityAddResultBinding
 import ie.wit.tennisapp.main.MainApp
@@ -22,6 +24,7 @@ class AddResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
         binding = ActivityAddResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -31,14 +34,26 @@ class AddResultActivity : AppCompatActivity() {
         app = application as MainApp
 
         val allMembers = app.members.findAll()
-        var memberNames: MutableList<String> = mutableListOf()
-        memberNames = allMembers.map{it.firstName + " " + it.lastName} as MutableList<String>
+        var memberNames: MutableList<String> = allMembers.map{it.firstName + " " + it.lastName} as MutableList<String>
+
         val playerOneSpinner = findViewById<Spinner>(R.id.playerOneSpinner)
         val playerTwoSpinner = findViewById<Spinner>(R.id.playerTwoSpinner)
         if (playerOneSpinner != null && playerTwoSpinner != null) {
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, memberNames)
             playerOneSpinner.adapter = adapter
             playerTwoSpinner.adapter = adapter
+        }
+
+        if (intent.hasExtra("result_edit")) {
+            edit = true
+            result = intent.extras?.getParcelable("result_edit")!!
+            println("NAME POSITION: " + memberNames.indexOf(result.playerOne))
+            binding.playerOneSpinner.setSelection(memberNames.indexOf(result.playerOne))
+            binding.playerTwoSpinner.setSelection(memberNames.indexOf(result.playerTwo))
+            var scores = result.score.split("-")
+            binding.playerOneScore.setText(scores[0])
+            binding.playerTwoScore.setText(scores[1])
+            binding.btnAdd.setText(R.string.save_result)
         }
 
         playerOneSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -60,13 +75,17 @@ class AddResultActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             val p1score = binding.playerOneScore.text.toString()
             val p2score = binding.playerTwoScore.text.toString()
-            result.result = "$p1score - $p2score"
-            if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.result.isEmpty()) {
+            result.score = "$p1score-$p2score"
+            if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.score.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                app.results.create(result.copy())
+                if (edit) {
+                    app.results.update(result.copy())
+                } else {
+                    app.results.create(result.copy())
+                }
             }
             setResult(RESULT_OK)
             finish()

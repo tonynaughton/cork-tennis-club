@@ -39,7 +39,6 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
             startActivityForResult(launcherIntent, 0)
         }
         loadMembers()
-
         registerRefreshCallback()
     }
 
@@ -49,7 +48,7 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
     }
 
     override fun onMemberClick(member: MemberModel) {
-        val launcherIntent = Intent(this, AddResultActivity::class.java)
+        val launcherIntent = Intent(this, AddMemberActivity::class.java)
         launcherIntent.putExtra("member_edit", member)
         refreshIntentLauncher.launch(launcherIntent)
     }
