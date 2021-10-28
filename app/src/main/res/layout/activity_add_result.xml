@@ -32,82 +32,71 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/player_one_spinner_label"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
-                android:textSize="18dp" />
+                android:text="@string/add_result_players_label"
+                android:textSize="18dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_result_score_label"
+                android:textSize="18dp"
+                android:layout_weight="5"
+                android:maxLines="1"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
             <Spinner
                 android:id="@+id/playerOneSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/player_two_spinner_label"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
-                android:textSize="18dp" />
-            <Spinner
-                android:id="@+id/playerTwoSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/result_edit_text_label"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
-                android:textSize="18dp" />
+                android:textSize="18dp"/>
             <EditText
                 android:id="@+id/playerOneScore"
-                android:layout_width="30dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:inputType="number"
-                android:hint="@string/P1_hint"
                 android:layout_margin="5dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dash"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
+                android:layout_weight="5"
+                android:textAlignment="center"
+                android:textSize="18dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <Spinner
+                android:id="@+id/playerTwoSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
                 android:textSize="18dp" />
             <EditText
                 android:id="@+id/playerTwoScore"
-                android:layout_width="30dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:inputType="number"
-                android:hint="@string/P2_hint"
                 android:layout_margin="5dp"
+                android:layout_weight="5"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textAlignment="center" />
         </LinearLayout>
-
-
     </LinearLayout>
 
     <Button

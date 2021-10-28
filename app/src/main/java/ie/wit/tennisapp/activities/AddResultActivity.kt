@@ -1,6 +1,5 @@
 package ie.wit.tennisapp.activities
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,7 +9,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.google.android.material.snackbar.Snackbar
-import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityAddResultBinding
 import ie.wit.tennisapp.main.MainApp
@@ -35,6 +33,8 @@ class AddResultActivity : AppCompatActivity() {
 
         val allMembers = app.members.findAll()
         var memberNames: MutableList<String> = allMembers.map{it.firstName + " " + it.lastName} as MutableList<String>
+        val addMemberString = "Select a member: "
+        memberNames.add(0, addMemberString)
 
         val playerOneSpinner = findViewById<Spinner>(R.id.playerOneSpinner)
         val playerTwoSpinner = findViewById<Spinner>(R.id.playerTwoSpinner)
@@ -71,21 +71,24 @@ class AddResultActivity : AppCompatActivity() {
         }
 
         binding.btnAdd.setOnClickListener() {
-            result.p1Score = binding.playerOneScore.text.toString().toInt()
-            result.p2Score = binding.playerTwoScore.text.toString().toInt()
-            if (result.playerOne.isEmpty() || result.playerTwo.isEmpty() || result.p1Score.toString().isEmpty() || result.p2Score.toString().isEmpty()) {
+            var p1score = binding.playerOneScore.text.toString()
+            var p2score = binding.playerTwoScore.text.toString()
+            println(result.playerOne == addMemberString)
+            if (result.playerOne == addMemberString || result.playerTwo == addMemberString || p1score.isEmpty() || p2score.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
                     .show()
             } else {
+                result.p1Score = p1score.toInt()
+                result.p2Score = p2score.toInt()
                 if (edit) {
                     app.results.update(result.copy())
                 } else {
                     app.results.create(result.copy())
                 }
+                setResult(RESULT_OK)
+                finish()
             }
-            setResult(RESULT_OK)
-            finish()
         }
     }
 

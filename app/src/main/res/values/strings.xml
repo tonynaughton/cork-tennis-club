@@ -36,4 +36,7 @@
     <string name="edit_label">EDIT</string>
     <string name="delete_label">DELETE</string>
     <string name="update_member">Update Member</string>
+    <string name="select_a_member">Please select a member from the dropdown</string>
+    <string name="add_result_players_label">Players:</string>
+    <string name="add_result_score_label">Score:</string>
 </resources>
