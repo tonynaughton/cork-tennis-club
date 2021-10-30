@@ -34,7 +34,7 @@
             android:name=".activities.ContactActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AddMemberActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".activities.HomeActivity"

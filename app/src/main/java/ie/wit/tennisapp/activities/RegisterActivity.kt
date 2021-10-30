@@ -16,15 +16,15 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.databinding.ActivityAddMemberBinding
+import ie.wit.tennisapp.databinding.ActivityRegisterBinding
 import ie.wit.tennisapp.helpers.showImagePicker
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
 import timber.log.Timber.i
 
-class AddMemberActivity() : AppCompatActivity() {
+class RegisterActivity() : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddMemberBinding
+    private lateinit var binding: ActivityRegisterBinding
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     var member = MemberModel()
     lateinit var app: MainApp
@@ -32,7 +32,7 @@ class AddMemberActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var edit = false
-        binding = ActivityAddMemberBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbarAdd.title = title

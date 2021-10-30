@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.AddMemberActivity">
+    tools:context=".activities.RegisterActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -167,7 +167,7 @@
                 android:background="@color/colorAccent"
                 android:padding="8dp"
                 android:stateListAnimator="@null"
-                android:text="@string/button_addMember"
+                android:text="@string/register"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
         </LinearLayout>

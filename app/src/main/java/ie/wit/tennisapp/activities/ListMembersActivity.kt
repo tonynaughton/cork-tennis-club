@@ -35,10 +35,6 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
         binding.recyclerView.adapter = MemberAdapter(app.members.findAll(), this)
         binding.toolbar.title = title
 
-        binding.btnAdd.setOnClickListener() {
-            val launcherIntent = Intent(this, AddMemberActivity::class.java)
-            startActivityForResult(launcherIntent, 0)
-        }
         loadMembers()
         registerRefreshCallback()
     }
@@ -49,7 +45,7 @@ class ListMembersActivity : AppCompatActivity(), MembersListener {
     }
 
     override fun onEditMemberClick(member: MemberModel) {
-        val launcherIntent = Intent(this, AddMemberActivity::class.java)
+        val launcherIntent = Intent(this, RegisterActivity::class.java)
         launcherIntent.putExtra("member_edit", member)
         refreshIntentLauncher.launch(launcherIntent)
     }

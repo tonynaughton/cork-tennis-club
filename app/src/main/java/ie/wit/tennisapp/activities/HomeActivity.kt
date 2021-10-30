@@ -25,7 +25,7 @@ class HomeActivity: AppCompatActivity() {
         }
 
         binding.registerButton.setOnClickListener {
-            startActivity(Intent(this, AddMemberActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         app = application as MainApp
@@ -43,7 +43,7 @@ class HomeActivity: AppCompatActivity() {
                 true
             }
             R.id.item_register -> {
-                startActivity(Intent(this, AddMemberActivity::class.java))
+                startActivity(Intent(this, RegisterActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
