@@ -42,19 +42,35 @@
             android:textSize="20sp"
             android:layout_weight="1"/>
 
-        <EditText
-            android:id="@+id/memberPassword"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/hint_password"
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:layout_weight="1"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/memberPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/togglePasswordVisibility"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:layout_weight="4"
+                android:scaleType="centerInside"
+                android:backgroundTint="@color/colorAccent" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnAdd"

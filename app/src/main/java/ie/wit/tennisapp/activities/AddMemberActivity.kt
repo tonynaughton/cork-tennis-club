@@ -4,10 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import android.widget.ImageButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
@@ -51,6 +56,20 @@ class AddMemberActivity() : AppCompatActivity() {
                 .into(binding.memberImage)
             if (member.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.change_member_image)
+            }
+        }
+
+        val togglePasswordVisButton = findViewById<ImageButton>(R.id.togglePasswordVisibility)
+        togglePasswordVisButton.setImageResource(R.drawable.ic_eye)
+
+        binding.togglePasswordVisibility.setOnClickListener() {
+            val passwordEntry = findViewById<EditText>(R.id.memberPassword)
+            if(togglePasswordVisButton.drawable.constantState == ContextCompat.getDrawable(this, R.drawable.ic_eye)?.constantState) {
+                togglePasswordVisButton.setImageResource(R.drawable.ic_eye_slash)
+                passwordEntry.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            } else {
+                togglePasswordVisButton.setImageResource(R.drawable.ic_eye)
+                passwordEntry.transformationMethod = PasswordTransformationMethod.getInstance()
             }
         }
 
