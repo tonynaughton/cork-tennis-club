@@ -8,8 +8,8 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.ImageButton
+import android.view.View
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -41,6 +41,15 @@ class RegisterActivity() : AppCompatActivity() {
 
         app = application as MainApp
 
+        val selectExperienceString = "Experience:"
+        val experienceOptions = mutableListOf(selectExperienceString, "Beginner", "Intermediate", "Experienced")
+
+        val experienceSpinner = findViewById<Spinner>(R.id.experienceSpinner)
+        if (experienceSpinner != null) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, experienceOptions)
+            experienceSpinner.adapter = adapter
+        }
+
         if (intent.hasExtra("member_edit")) {
             edit = true
             member = intent.extras?.getParcelable("member_edit")!!
@@ -49,7 +58,7 @@ class RegisterActivity() : AppCompatActivity() {
             binding.memberEmail.setText(member.email)
             binding.memberPassword.setText(member.password)
             binding.memberDob.setText(member.dob)
-            binding.memberExperience.setText(member.experience)
+            binding.experienceSpinner.setSelection(experienceOptions.indexOf(member.experience))
             binding.btnAdd.setText(R.string.update_member)
             Picasso.get()
                 .load(member.image)
@@ -57,6 +66,13 @@ class RegisterActivity() : AppCompatActivity() {
             if (member.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.change_member_image)
             }
+        }
+
+        experienceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                member.experience = experienceOptions[position]
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         val togglePasswordVisButton = findViewById<ImageButton>(R.id.togglePasswordVisibility)
@@ -79,9 +95,8 @@ class RegisterActivity() : AppCompatActivity() {
             member.email = binding.memberEmail.text.toString()
             member.password = binding.memberPassword.text.toString()
             member.dob = binding.memberDob.text.toString()
-            member.experience = binding.memberExperience.text.toString()
             if (member.firstName.isEmpty() || member.lastName.isEmpty()
-                || member.dob.isEmpty() || member.experience.isEmpty()
+                || member.dob.isEmpty() || member.experience == selectExperienceString
                 || member.email.isEmpty() || member.password.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)

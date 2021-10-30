@@ -126,19 +126,27 @@
                     android:textSize="18sp"
                     android:layout_weight="1"/>
 
-                <EditText
-                    android:id="@+id/memberExperience"
+                <Spinner
+                    android:id="@+id/experienceSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="@string/hint_memberExperience"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"/>
+
+<!--                <EditText-->
+<!--                    android:id="@+id/memberExperience"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:hint="@string/hint_memberExperience"-->
+<!--                    android:inputType="text"-->
+<!--                    android:maxLength="25"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:textColor="@color/colorPrimaryDark"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:layout_weight="1"/>-->
 
             </LinearLayout>
 

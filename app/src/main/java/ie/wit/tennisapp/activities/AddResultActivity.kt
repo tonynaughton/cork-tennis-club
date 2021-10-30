@@ -73,7 +73,6 @@ class AddResultActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             var p1score = binding.playerOneScore.text.toString()
             var p2score = binding.playerTwoScore.text.toString()
-            println(result.playerOne == addMemberString)
             if (result.playerOne == addMemberString || result.playerTwo == addMemberString || p1score.isEmpty() || p2score.isEmpty()) {
                 Snackbar
                     .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)

@@ -94,7 +94,7 @@ class ListResultsActivity : AppCompatActivity(), ResultsListener {
                 startActivity(Intent(this, ContactActivity::class.java))
                 true
             }
-            R.id.item_contact -> {
+            R.id.item_logout -> {
                 startActivity(Intent(this, HomeActivity::class.java))
                 true
             }
