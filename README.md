@@ -15,7 +15,7 @@ An Android mobile app developed which stores and displays data relating to a fic
 - Developed in Android Studio using Kotlin
 - [Google Maps API](https://developers.google.com/maps)
 - [Picasso](https://square.github.io/picasso/)
-- [Gson](https://github.com/google/gson)#
+- [Gson](https://github.com/google/gson)
 
 ## Screenshots
 
