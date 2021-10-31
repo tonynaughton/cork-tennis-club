@@ -107,9 +107,9 @@ class RegisterActivity() : AppCompatActivity() {
                 } else {
                     app.members.create(member.copy())
                 }
+                setResult(RESULT_OK)
+                finish()
             }
-            setResult(RESULT_OK)
-            finish()
         }
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
