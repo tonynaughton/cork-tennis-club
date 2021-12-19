@@ -64,7 +64,7 @@ class ContactActivity: AppCompatActivity(), OnMapReadyCallback {
                 true
             }
             R.id.item_logout -> {
-                startActivity(Intent(this, HomeActivity::class.java))
+                startActivity(Intent(this, WelcomeActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

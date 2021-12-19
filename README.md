@@ -19,7 +19,7 @@ An Android mobile app developed which stores and displays data relating to a fic
 
 ## Screenshots
 
-![Home Screenshot](img/home-screenshot.png)
+![Welcome Screenshot](img/welcome-screenshot.png)
 ![Register Screenshot](img/register-screenshot.png)
 ![Members List Screenshot](img/members-list-screenshot.png)
 ![Add Result Screenshot](img/add-result-screenshot.png)

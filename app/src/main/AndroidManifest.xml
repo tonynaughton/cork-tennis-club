@@ -37,7 +37,7 @@
             android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".activities.WelcomeActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activities.ListResultsActivity" />

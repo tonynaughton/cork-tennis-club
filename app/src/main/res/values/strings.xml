@@ -10,14 +10,14 @@
     <string name="menu_members">Members</string>
     <string name="save_result">Update Result</string>
     <string name="fill_in_all_fields">Please fill in all fields</string>
-    <string name="home_title">Welcome to Cork Tennis Club!</string>
+    <string name="welcome_title">Welcome to Cork Tennis Club!</string>
     <string name="hint_memberFirstName">First name</string>
     <string name="hint_memberLastName">Last name</string>
     <string name="hint_memberDob">D.O.B.</string>
     <string name="select_member_image">Select member image</string>
     <string name="button_addImage">Add Profile Picture</string>
     <string name="change_member_image">Change member image</string>
-    <string name="home_subtitle">Est. 2021</string>
+    <string name="welcome_subtitle">Est. 2021</string>
     <string name="hint_memberExperience">Experience</string>
     <string name="menu_contact">Contact</string>
     <string name="contact_email">corktennisclub@gmail.com</string>

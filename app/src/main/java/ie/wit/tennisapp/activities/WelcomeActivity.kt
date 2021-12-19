@@ -6,17 +6,17 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.databinding.ActivityHomeBinding
+import ie.wit.tennisapp.databinding.ActivityWelcomeBinding
 import ie.wit.tennisapp.main.MainApp
 
-class HomeActivity: AppCompatActivity() {
+class WelcomeActivity: AppCompatActivity() {
 
     lateinit var app: MainApp
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
@@ -32,7 +32,7 @@ class HomeActivity: AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
+        menuInflater.inflate(R.menu.menu_welcome, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
