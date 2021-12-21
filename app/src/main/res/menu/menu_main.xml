@@ -13,7 +13,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/item_contact"
+        android:id="@+id/contactFragment"
         android:title="@string/menu_contact"
         app:showAsAction="never" />
 

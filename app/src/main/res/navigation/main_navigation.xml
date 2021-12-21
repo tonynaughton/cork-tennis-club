@@ -15,6 +15,11 @@
             app:destination="@id/membersFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_resultsFragment_to_contactFragment"
+            app:destination="@id/contactFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/membersFragment"
@@ -23,6 +28,17 @@
         tools:layout="@layout/fragment_members" >
         <action
             android:id="@+id/action_membersFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="ie.wit.tennisapp.fragments.ContactFragment"
+        android:label="@string/menu_contact"
+        tools:layout="@layout/fragment_contact" >
+        <action
+            android:id="@+id/action_contactFragment_to_resultsFragment"
             app:destination="@id/resultsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />

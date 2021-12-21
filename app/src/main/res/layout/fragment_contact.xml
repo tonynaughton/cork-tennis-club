@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.ContactFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_title"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="35sp"
+            android:layout_margin="20dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:textColor="@color/colorPrimaryDark"
+                app:srcCompat="@drawable/ic_envelope"
+                android:layout_marginEnd="10dp" />
+            <TextView
+                android:id="@+id/contact_link_email"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/contact_email"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:textColor="@color/colorPrimaryDark"
+                app:srcCompat="@drawable/ic_phone_alt"
+                android:layout_marginEnd="10dp" />
+            <TextView
+                android:id="@+id/contact_link_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/contact_phone"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:textColor="@color/colorPrimaryDark"
+                app:srcCompat="@drawable/ic_map_marker_alt"
+                android:layout_marginEnd="10dp" />
+            <TextView
+                android:id="@+id/contact_link_location"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/contact_location"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="30dp"
+            map:uiZoomControls="true"
+            map:uiRotateGestures="true"
+            map:cameraZoom="16" />
+
+    </LinearLayout>
+
+</LinearLayout>
