@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ie.wit.tennisapp">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
 
     <application
         android:name=".main.MainApp"
@@ -33,9 +35,6 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ContactActivity"
             android:exported="false" />
         <activity
             android:name=".activities.RegisterActivity"
