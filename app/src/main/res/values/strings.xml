@@ -45,4 +45,10 @@
     <string name="menu_logout">Logout</string>
     <string name="user_does_not_exist">Incorrect email and/or password</string>
     <string name="login_successful">Login Successful!</string>
+    <string name="action_share">Share</string>
+    <string name="action_send">Send</string>
+    <string name="group_communicate">Communicate</string>
+    <string name="nav_header_title">Cork Tennis Club</string>
+    <string name="nav_header_subtitle">Your home of tennis</string>
+    <string name="nav_header_desc">Menu</string>
 </resources>

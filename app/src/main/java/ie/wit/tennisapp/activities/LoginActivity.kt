@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityLoginBinding
+import ie.wit.tennisapp.fragments.ResultsFragment
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
 
@@ -64,7 +65,7 @@ class LoginActivity() : AppCompatActivity() {
                 }
                 if (verifiedUser) {
                     setResult(RESULT_OK)
-                    startActivity(Intent(this, ListResultsActivity::class.java))
+                    startActivity(Intent(this, ResultsFragment::class.java))
                 } else {
                     Snackbar
                         .make(it, R.string.user_does_not_exist, Snackbar.LENGTH_LONG)

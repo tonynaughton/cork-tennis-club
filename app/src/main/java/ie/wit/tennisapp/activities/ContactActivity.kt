@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import ie.wit.tennisapp.fragments.MembersFragment
+import ie.wit.tennisapp.fragments.ResultsFragment
 
 class ContactActivity: AppCompatActivity(), OnMapReadyCallback {
 
@@ -51,12 +53,12 @@ class ContactActivity: AppCompatActivity(), OnMapReadyCallback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.item_view_results -> {
-                startActivity(Intent(this, ListResultsActivity::class.java))
+            R.id.resultsFragment -> {
+                startActivity(Intent(this, ResultsFragment::class.java))
                 true
             }
-            R.id.item_view_members -> {
-                startActivity(Intent(this, ListMembersActivity::class.java))
+            R.id.membersFragment -> {
+                startActivity(Intent(this, MembersFragment::class.java))
                 true
             }
             R.id.item_contact -> {
