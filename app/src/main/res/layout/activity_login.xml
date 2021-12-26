@@ -61,7 +61,7 @@
                 android:layout_weight="1"/>
 
             <ImageButton
-                android:id="@+id/togglePasswordVisibility"
+                android:id="@+id/togglePasswordVisButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnAdd"
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

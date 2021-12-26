@@ -96,7 +96,7 @@
                     android:layout_weight="1"/>
 
                 <ImageButton
-                    android:id="@+id/togglePasswordVisibility"
+                    android:id="@+id/togglePasswordVisButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
@@ -134,20 +134,6 @@
                     android:layout_margin="5dp"
                     android:textSize="18dp"/>
 
-<!--                <EditText-->
-<!--                    android:id="@+id/memberExperience"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="8dp"-->
-<!--                    android:hint="@string/hint_memberExperience"-->
-<!--                    android:inputType="text"-->
-<!--                    android:maxLength="25"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:padding="8dp"-->
-<!--                    android:textColor="@color/colorPrimaryDark"-->
-<!--                    android:textSize="18sp"-->
-<!--                    android:layout_weight="1"/>-->
-
             </LinearLayout>
 
             <Button
@@ -168,7 +154,7 @@
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <Button
-                android:id="@+id/btnAdd"
+                android:id="@+id/registerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"

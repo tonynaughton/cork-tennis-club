@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "65558472776",
+    "project_id": "cork-tennis-club-app",
+    "storage_bucket": "cork-tennis-club-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65558472776:android:ebd57070c0ff9ed574d07d",
+        "android_client_info": {
+          "package_name": "ie.wit.tennisapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65558472776-ivabk8pgjnbq4k9o4efrlhj2po5k56jr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADcRV7zTH5xgj-3zL4O24pebqj4xrJimM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65558472776-ivabk8pgjnbq4k9o4efrlhj2po5k56jr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

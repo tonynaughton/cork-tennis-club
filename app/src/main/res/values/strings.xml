@@ -41,7 +41,6 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="hint_emailAddress">Email</string>
-    <string name="hint_password">Password</string>
     <string name="menu_logout">Logout</string>
     <string name="user_does_not_exist">Incorrect email and/or password</string>
     <string name="login_successful">Login Successful!</string>
@@ -51,6 +50,27 @@
     <string name="nav_header_title">Cork Tennis Club</string>
     <string name="nav_header_subtitle">Your home of tennis</string>
     <string name="nav_header_desc">Menu</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- START Firebase Resources-->
+
+    <string name="label_emailpassword">Email/Password Authentication</string>
+    <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="send_link">Send Link</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading…</string>
+    <string name="signed_in">Signed In</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="token_null">Token: null</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="firebase_user_management">Firebase User Management</string>
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+    <string name="emailpassword_title_text">Please Login Below</string>
 </resources>
