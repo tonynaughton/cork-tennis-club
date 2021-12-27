@@ -73,4 +73,5 @@
     <string name="firebase_user_management">Firebase User Management</string>
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="emailpassword_title_text">Please Login Below</string>
+    <string name="select_experience">Select experience</string>
 </resources>

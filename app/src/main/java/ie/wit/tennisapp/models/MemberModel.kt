@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MemberModel(
     var id: Long = 0,
+    var firebaseId: String = "",
     var email: String = "",
     var password: String = "",
     var firstName: String = "",

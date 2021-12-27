@@ -1,8 +1,6 @@
 package ie.wit.tennisapp.activities
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,19 +13,19 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import ie.wit.tennisapp.R
+import ie.wit.tennisapp.auth.LoginRegisterViewModel
 import ie.wit.tennisapp.databinding.ActivityLoginBinding
-import ie.wit.tennisapp.fragments.ResultsFragment
-import ie.wit.tennisapp.helpers.showImagePicker
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
 import timber.log.Timber
 
 class LoginActivity() : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var loginRegisterViewModel : LoginRegisterViewModel
     private lateinit var binding: ActivityLoginBinding
     var member = MemberModel()
     lateinit var app: MainApp
@@ -47,32 +45,6 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
         binding.loginButton.setOnClickListener(this)
         binding.togglePasswordVisButton.setOnClickListener(this)
 
-//        binding.loginButton.setOnClickListener() {
-//            member.email = binding.memberEmail.text.toString()
-//            member.password = binding.memberPassword.text.toString()
-//            if (member.email.isEmpty() || member.password.isEmpty()) {
-//                Snackbar
-//                    .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
-//                    .show()
-//            } else {
-//                var verifiedUser = false
-//                var allMembers = app.members.findAll()
-//                allMembers.forEach { it ->
-//                    if ((it.email == member.email) && (it.password == member.password)) {
-//                        verifiedUser = true
-//                    }
-//                }
-//                if (verifiedUser) {
-//                    setResult(RESULT_OK)
-//                    startActivity(Intent(this, ResultsFragment::class.java))
-//                } else {
-//                    Snackbar
-//                        .make(it, R.string.user_does_not_exist, Snackbar.LENGTH_LONG)
-//                        .show()
-//                }
-//            }
-//        }
-
         togglePasswordVisButton = findViewById(R.id.togglePasswordVisButton)
         togglePasswordVisButton.setImageResource(R.drawable.ic_eye)
 
@@ -85,26 +57,27 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Timber.d( "signInWithEmail:success")
-                    val user = auth.currentUser
-                    setResult(RESULT_OK)
-                    startActivity(Intent(this, Home::class.java))
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Timber.w( "signInWithEmail:failure $task.exception")
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                }
+        loginRegisterViewModel.login(email, password)
+    }
 
-                if (!task.isSuccessful) {
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
+    public override fun onStart() {
+        super.onStart()
+
+        loginRegisterViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
+        loginRegisterViewModel.liveFirebaseUser.observe(this, Observer {
+            firebaseUser -> if (firebaseUser != null)
+                startActivity(Intent(this, Home::class.java))
+        })
+
+        loginRegisterViewModel.firebaseAuthManager.errorStatus.observe(this, Observer
+        { status -> checkStatus(status) })
+    }
+
+    private fun checkStatus(error:Boolean) {
+        if (error)
+            Toast.makeText(this,
+                getString(R.string.auth_failed),
+                Toast.LENGTH_LONG).show()
     }
 
     private fun validateForm(): Boolean {

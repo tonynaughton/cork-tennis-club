@@ -16,5 +16,10 @@
             android:id="@+id/contactFragment"
             android:icon="@drawable/ic_phone_alt"
             android:title="@string/menu_contact" />
+        <item
+            android:id="@+id/signout"
+            android:icon="@android:drawable/ic_menu_revert"
+            android:title="@string/sign_out"
+            android:onClick="signOut"/>
     </group>
 </menu>

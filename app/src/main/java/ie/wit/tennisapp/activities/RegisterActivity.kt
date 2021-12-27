@@ -23,6 +23,7 @@ import ie.wit.tennisapp.databinding.ActivityRegisterBinding
 import ie.wit.tennisapp.helpers.showImagePicker
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
+import org.w3c.dom.Text
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -34,10 +35,11 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
     lateinit var app: MainApp
     private lateinit var auth: FirebaseAuth
     private lateinit var togglePasswordVisButton: ImageButton
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var edit = false
+
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -47,7 +49,7 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
 
         app = application as MainApp
 
-        val selectExperienceString = "Experience:"
+        val selectExperienceString = getString(R.string.select_experience)
         val experienceOptions = mutableListOf(selectExperienceString, "Beginner", "Intermediate", "Experienced")
 
         val experienceSpinner = findViewById<Spinner>(R.id.experienceSpinner)
@@ -85,29 +87,6 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
         binding.togglePasswordVisButton.setOnClickListener(this)
         binding.chooseImage.setOnClickListener(this)
 
-//        binding.registerButton.setOnClickListener() {
-//            member.firstName = binding.memberFirstName.text.toString()
-//            member.lastName = binding.memberLastName.text.toString()
-//            member.email = binding.memberEmail.text.toString()
-//            member.password = binding.memberPassword.text.toString()
-//            member.dob = binding.memberDob.text.toString()
-//            if (member.firstName.isEmpty() || member.lastName.isEmpty()
-//                || member.dob.isEmpty() || member.experience == selectExperienceString
-//                || member.email.isEmpty() || member.password.isEmpty()) {
-//                Snackbar
-//                    .make(it, R.string.fill_in_all_fields, Snackbar.LENGTH_LONG)
-//                    .show()
-//            } else {
-//                if (edit) {
-//                    app.members.update(member.copy())
-//                } else {
-//                    app.members.create(member.copy())
-//                }
-//                setResult(RESULT_OK)
-//                finish()
-//            }
-//        }
-
         togglePasswordVisButton = findViewById(R.id.togglePasswordVisButton)
         togglePasswordVisButton.setImageResource(R.drawable.ic_eye)
 
@@ -120,15 +99,27 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        member.firstName = binding.memberFirstName.text.toString()
+        member.lastName = binding.memberLastName.text.toString()
+        member.email = binding.memberEmail.text.toString()
+        member.password = binding.memberPassword.text.toString()
+        member.dob = binding.memberDob.text.toString()
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Timber.d( "createUserWithEmail:success")
-                    finish()
+                    member.firebaseId = auth.currentUser!!.uid
+                    if (edit) {
+                        app.members.update(member.copy())
+                    } else {
+                        app.members.create(member.copy())
+                    }
+                    Toast.makeText(baseContext, "Registration successful.",
+                        Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, Home::class.java))
                     setResult(RESULT_OK)
                 } else {
-                    // If sign in fails, display a message to the user.
                     Timber.w( "createUserWithEmail:failure $task.exception")
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
@@ -138,6 +129,22 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
 
     private fun validateForm(): Boolean {
         var valid = true
+
+        val firstName = binding.memberFirstName.text.toString()
+        if (TextUtils.isEmpty(firstName)) {
+            binding.memberFirstName.error = "Required."
+            valid = false
+        } else {
+            binding.memberFirstName.error = null
+        }
+
+        val lastName = binding.memberLastName.text.toString()
+        if (TextUtils.isEmpty(lastName)) {
+            binding.memberLastName.error = "Required."
+            valid = false
+        } else {
+            binding.memberLastName.error = null
+        }
 
         val email = binding.memberEmail.text.toString()
         if (TextUtils.isEmpty(email)) {
@@ -153,6 +160,21 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             valid = false
         } else {
             binding.memberPassword.error = null
+        }
+
+        val dateOfBirth = binding.memberDob.text.toString()
+        if (TextUtils.isEmpty(dateOfBirth)) {
+            binding.memberDob.error = "Required."
+            valid = false
+        } else {
+            binding.memberDob.error = null
+        }
+
+        if (member.experience === getString(R.string.select_experience)) {
+            val errorText = binding.experienceSpinner.selectedView as TextView
+            errorText.error = "Required"
+            errorText.requestFocus()
+            valid = false
         }
 
         return valid
