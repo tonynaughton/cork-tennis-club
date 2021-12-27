@@ -7,8 +7,8 @@ import ie.wit.tennisapp.databinding.CardResultBinding
 import ie.wit.tennisapp.models.ResultModel
 
 interface ResultsListener {
-    fun onEditResultClick(result: ResultModel)
-    fun onDeleteResultClick(result: ResultModel)
+    fun onResultEditSwiped(resultPosition: Int)
+    fun onResultDeleteSwiped(resultPosition: Int)
 }
 
 class ResultAdapter constructor(private var results: List<ResultModel>,
@@ -36,8 +36,6 @@ class ResultAdapter constructor(private var results: List<ResultModel>,
             binding.resultPlayerTwo.text = result.playerTwo
             binding.resultPlayerOneScore.text = result.p1Score.toString()
             binding.resultPlayerTwoScore.text = result.p2Score.toString()
-            binding.editButton.setOnClickListener { listener.onEditResultClick(result) }
-            binding.deleteButton.setOnClickListener { listener.onDeleteResultClick(result) }
         }
     }
 }

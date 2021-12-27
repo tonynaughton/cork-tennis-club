@@ -3,11 +3,12 @@ package ie.wit.tennisapp.models
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class MemberModel(
     var id: Long = 0,
-    var firebaseId: String = "",
+    var uuid: String = "",
     var email: String = "",
     var password: String = "",
     var firstName: String = "",

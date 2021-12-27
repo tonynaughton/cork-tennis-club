@@ -7,17 +7,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.activities.AddResultActivity
-import ie.wit.tennisapp.activities.RegisterActivity
 import ie.wit.tennisapp.adapters.ResultAdapter
 import ie.wit.tennisapp.adapters.ResultsListener
 import ie.wit.tennisapp.databinding.FragmentResultsBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.ResultModel
+import ie.wit.tennisapp.utils.SwipeToDeleteCallback
+import ie.wit.tennisapp.utils.SwipeToEditCallback
 
 class ResultsFragment : Fragment(), ResultsListener {
 
@@ -45,11 +46,12 @@ class ResultsFragment : Fragment(), ResultsListener {
         fragBinding.recyclerView.layoutManager = layoutManager
         fragBinding.recyclerView.adapter = ResultAdapter(app.results.findAll(), this)
 
-        fragBinding.btnAdd.setOnClickListener() {
+        fragBinding.addResultButton.setOnClickListener() {
             val launcherIntent = Intent(context, AddResultActivity::class.java)
             startActivityForResult(launcherIntent, 0)
         }
 
+        setEditAndDeleteSwipeFunctions()
         loadResults()
         registerRefreshCallback()
 
@@ -64,22 +66,46 @@ class ResultsFragment : Fragment(), ResultsListener {
             }
     }
 
-    override fun onEditResultClick(result: ResultModel) {
-        val launcherIntent = Intent(context, AddResultActivity::class.java)
-        launcherIntent.putExtra("result_edit", result)
-        refreshIntentLauncher.launch(launcherIntent)
+    private fun setEditAndDeleteSwipeFunctions() {
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onResultDeleteSwiped(viewHolder.adapterPosition)
+            }
+        }
+        val swipeEditHandler = object : SwipeToEditCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onResultEditSwiped(viewHolder.adapterPosition)
+            }
+        }
+
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+
+        itemTouchDeleteHelper.attachToRecyclerView(fragBinding.recyclerView)
+        itemTouchEditHelper.attachToRecyclerView(fragBinding.recyclerView)
     }
 
-    override fun onDeleteResultClick(result: ResultModel) {
+    override fun onResultDeleteSwiped(resultPosition: Int) {
         val builder = context?.let { AlertDialog.Builder(it) }
         builder?.setMessage("Are you sure you want to delete this result?")?.setCancelable(false)
             ?.setPositiveButton("Yes") { _, _ ->
-                app.results.delete(result)
+                var targetResult = app.results.findAll().elementAt(resultPosition)
+                val adapter = fragBinding.recyclerView.adapter as ResultAdapter
+                app.results.delete(targetResult)
+                adapter.notifyItemRemoved(resultPosition)
                 fragBinding.recyclerView.adapter?.notifyDataSetChanged()
             }?.setNegativeButton("No") { dialog, _ ->
+                fragBinding.recyclerView.adapter?.notifyDataSetChanged()
                 dialog.dismiss()
             }
         builder?.create()?.show()
+    }
+
+    override fun onResultEditSwiped(resultPosition: Int) {
+        var targetResult = app.results.findAll().elementAt(resultPosition)
+        val launcherIntent = Intent(context, AddResultActivity::class.java)
+        launcherIntent.putExtra("result_edit", targetResult)
+        refreshIntentLauncher.launch(launcherIntent)
     }
 
     private fun registerRefreshCallback() {
@@ -105,9 +131,5 @@ class ResultsFragment : Fragment(), ResultsListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _fragBinding = null
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 }

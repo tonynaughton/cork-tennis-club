@@ -14,8 +14,7 @@
         android:padding="10dp">
 
         <LinearLayout
-            android:padding="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -41,12 +40,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:padding="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1.8"
-            android:gravity="center_vertical">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/resultPlayerOneScore"
                 android:layout_width="wrap_content"
@@ -54,7 +50,8 @@
                 android:textSize="20dp"
                 android:maxLines="1"
                 tools:text="P1 Score"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:textAlignment="textEnd"/>
             <TextView
                 android:id="@+id/resultPlayerTwoScore"
                 android:layout_width="wrap_content"
@@ -62,34 +59,8 @@
                 android:textSize="20dp"
                 android:maxLines="1"
                 android:padding="10dp"
-                tools:text="P2 Score" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
-            >
-            <ImageButton
-                android:id="@+id/editButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_edit"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:scaleType="fitXY"
-                android:backgroundTint="@color/editButton" />
-            <ImageButton
-                android:id="@+id/deleteButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_trash_alt"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:scaleType="fitXY"
-                android:backgroundTint="@color/deleteButton" />
+                tools:text="P2 Score"
+                android:textAlignment="textEnd"/>
         </LinearLayout>
 
     </LinearLayout>

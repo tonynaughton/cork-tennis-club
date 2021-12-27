@@ -51,7 +51,7 @@ class AddResultActivity : AppCompatActivity() {
             binding.playerTwoSpinner.setSelection(memberNames.indexOf(result.playerTwo))
             binding.playerOneScore.setText(result.p1Score.toString())
             binding.playerTwoScore.setText(result.p2Score.toString())
-            binding.btnAdd.setText(R.string.update_result)
+            binding.addResultButton.setText(R.string.update_result)
         }
 
         playerOneSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -70,7 +70,7 @@ class AddResultActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        binding.btnAdd.setOnClickListener() {
+        binding.addResultButton.setOnClickListener() {
             var p1score = binding.playerOneScore.text.toString()
             var p2score = binding.playerTwoScore.text.toString()
             if (result.playerOne == addMemberString || result.playerTwo == addMemberString || p1score.isEmpty() || p2score.isEmpty()) {

@@ -109,7 +109,7 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Timber.d( "createUserWithEmail:success")
-                    member.firebaseId = auth.currentUser!!.uid
+                    member.uuid = auth.currentUser!!.uid
                     if (edit) {
                         app.members.update(member.copy())
                     } else {
