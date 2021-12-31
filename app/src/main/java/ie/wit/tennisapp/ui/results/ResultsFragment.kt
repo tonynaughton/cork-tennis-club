@@ -1,4 +1,4 @@
-package ie.wit.tennisapp.fragments
+package ie.wit.tennisapp.ui.results
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,15 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.activities.AddResultActivity
+import ie.wit.tennisapp.ui.addResult.AddResultFragment
 import ie.wit.tennisapp.adapters.ResultAdapter
 import ie.wit.tennisapp.adapters.ResultsListener
 import ie.wit.tennisapp.databinding.FragmentResultsBinding
@@ -26,6 +30,7 @@ class ResultsFragment : Fragment(), ResultsListener {
     private var _fragBinding: FragmentResultsBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+//    private lateinit var resultsViewModel: ResultsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,23 +42,22 @@ class ResultsFragment : Fragment(), ResultsListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _fragBinding = FragmentResultsBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.menu_results)
 
-        val layoutManager = LinearLayoutManager(context)
-        fragBinding.recyclerView.layoutManager = layoutManager
-        fragBinding.recyclerView.adapter = ResultAdapter(app.results.findAll(), this)
 
-        fragBinding.addResultButton.setOnClickListener() {
-            val launcherIntent = Intent(context, AddResultActivity::class.java)
-            startActivityForResult(launcherIntent, 0)
+        val fab: FloatingActionButton = fragBinding.fab
+        fab.setOnClickListener {
+            val action = ResultsFragmentDirections.actionResultsFragmentToAddResultFragment()
+            findNavController().navigate(action)
         }
 
         setEditAndDeleteSwipeFunctions()
         loadResults()
         registerRefreshCallback()
+
+        render(app.results.findAll())
 
         return root
     }
@@ -77,10 +81,8 @@ class ResultsFragment : Fragment(), ResultsListener {
                 onResultEditSwiped(viewHolder.adapterPosition)
             }
         }
-
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
-
         itemTouchDeleteHelper.attachToRecyclerView(fragBinding.recyclerView)
         itemTouchEditHelper.attachToRecyclerView(fragBinding.recyclerView)
     }
@@ -103,9 +105,8 @@ class ResultsFragment : Fragment(), ResultsListener {
 
     override fun onResultEditSwiped(resultPosition: Int) {
         var targetResult = app.results.findAll().elementAt(resultPosition)
-        val launcherIntent = Intent(context, AddResultActivity::class.java)
-        launcherIntent.putExtra("result_edit", targetResult)
-        refreshIntentLauncher.launch(launcherIntent)
+        val action = ResultsFragmentDirections.actionResultsFragmentToAddResultFragment(targetResult.id.toString())
+        findNavController().navigate(action)
     }
 
     private fun registerRefreshCallback() {
@@ -126,6 +127,18 @@ class ResultsFragment : Fragment(), ResultsListener {
     private fun showResults (results: List<ResultModel>) {
         fragBinding.recyclerView.adapter = ResultAdapter(results, this)
         fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    private fun render(resultsList: List<ResultModel>) {
+        fragBinding.recyclerView.layoutManager = LinearLayoutManager(context)
+        fragBinding.recyclerView.adapter = ResultAdapter(resultsList, this)
+        if (resultsList.isEmpty()) {
+            fragBinding.recyclerView.visibility = View.GONE
+            fragBinding.resultsNotFound.visibility = View.VISIBLE
+        } else {
+            fragBinding.recyclerView.visibility = View.VISIBLE
+            fragBinding.resultsNotFound.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

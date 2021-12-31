@@ -1,4 +1,4 @@
-package ie.wit.tennisapp.fragments
+package ie.wit.tennisapp.ui.members
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.activities.RegisterActivity
@@ -25,6 +25,8 @@ class MembersFragment : Fragment(), MembersListener {
     private val fragBinding get() = _fragBinding!!
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
+    private lateinit var membersViewModel: MembersViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
@@ -38,6 +40,13 @@ class MembersFragment : Fragment(), MembersListener {
         _fragBinding = FragmentMembersBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.menu_members)
+
+        membersViewModel =
+            ViewModelProvider(this).get(MembersViewModel::class.java)
+        //val textView: TextView = root.findViewById(R.id.text_gallery)
+        membersViewModel.text.observe(viewLifecycleOwner, Observer {
+            //textView.text = it
+        })
 
         val layoutManager = LinearLayoutManager(context)
         fragBinding.recyclerView.layoutManager = layoutManager

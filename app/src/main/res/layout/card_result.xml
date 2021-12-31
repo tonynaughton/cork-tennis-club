@@ -1,67 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:elevation="24dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="result"
+            type="ie.wit.tennisapp.models.ResultModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_marginBottom="8dp"
+        android:elevation="24dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/resultPlayerOne"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:layout_gravity="center_vertical"
-                tools:text="Player One" />
-            <TextView
-                android:id="@+id/resultPlayerTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:layout_gravity="center_vertical"
-                tools:text="Player Two" />
-        </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/resultPlayerOneScore"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:maxLines="1"
-                tools:text="P1 Score"
-                android:padding="10dp"
-                android:textAlignment="textEnd"/>
-            <TextView
-                android:id="@+id/resultPlayerTwoScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:maxLines="1"
-                android:padding="10dp"
-                tools:text="P2 Score"
-                android:textAlignment="textEnd"/>
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/resultPlayerOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:layout_gravity="center_vertical"
+                    tools:text="@{result.playerOne}" />
+                <TextView
+                    android:id="@+id/resultPlayerTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:layout_gravity="center_vertical"
+                    tools:text="@{result.playerTwo}" />
+            </LinearLayout>
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/resultPlayerOneScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:maxLines="1"
+                    tools:text="@{Integer.toString(result.p1Score)}"
+                    android:padding="10dp"
+                    android:textAlignment="textEnd"/>
+                <TextView
+                    android:id="@+id/resultPlayerTwoScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    tools:text="@{Integer.toString(result.p2Score)}"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

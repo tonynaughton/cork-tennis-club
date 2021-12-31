@@ -29,6 +29,13 @@ class ResultJSONStore(private val context: Context) : ResultStore {
         }
     }
 
+    override fun findById(id: Long): ResultModel? {
+        var result = results.find {
+            it.id == id
+        }
+        return result
+    }
+
     override fun findAll(): MutableList<ResultModel> {
         logAll()
         return results

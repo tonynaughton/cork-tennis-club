@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/resultsFragment"
-        android:name="ie.wit.tennisapp.fragments.ResultsFragment"
+        android:name="ie.wit.tennisapp.ui.results.ResultsFragment"
         android:label="@string/menu_results"
         tools:layout="@layout/fragment_results" >
         <action
@@ -20,10 +20,15 @@
             app:destination="@id/contactFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_resultsFragment_to_addResultFragment"
+            app:destination="@id/addResultFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/membersFragment"
-        android:name="ie.wit.tennisapp.fragments.MembersFragment"
+        android:name="ie.wit.tennisapp.ui.members.MembersFragment"
         android:label="@string/menu_members"
         tools:layout="@layout/fragment_members" >
         <action
@@ -34,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactFragment"
-        android:name="ie.wit.tennisapp.fragments.ContactFragment"
+        android:name="ie.wit.tennisapp.ui.contact.ContactFragment"
         android:label="@string/menu_contact"
         tools:layout="@layout/fragment_contact" >
         <action
@@ -42,5 +47,21 @@
             app:destination="@id/resultsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/addResultFragment"
+        android:name="ie.wit.tennisapp.ui.addResult.AddResultFragment"
+        android:label="@string/menu_addResult"
+        tools:layout="@layout/fragment_add_result" >
+        <action
+            android:id="@+id/action_addResultFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <argument
+            android:name="result"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
 </navigation>

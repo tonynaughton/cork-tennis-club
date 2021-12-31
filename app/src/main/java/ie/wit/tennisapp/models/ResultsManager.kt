@@ -2,7 +2,7 @@ package ie.wit.tennisapp.models
 
 import timber.log.Timber.i
 
-class ResultsMemStore : ResultStore {
+object ResultsManager : ResultStore {
 
     var lastId = 0L
 
@@ -14,6 +14,10 @@ class ResultsMemStore : ResultStore {
 
     override fun findAll(): List<ResultModel> {
         return results
+    }
+
+    override fun findById(id: Long): ResultModel {
+        TODO("Not yet implemented")
     }
 
     override fun create(result: ResultModel) {
