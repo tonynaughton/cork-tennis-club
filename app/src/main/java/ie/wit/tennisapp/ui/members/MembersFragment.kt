@@ -9,7 +9,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.activities.RegisterActivity
 import ie.wit.tennisapp.adapters.MemberAdapter
@@ -17,6 +20,9 @@ import ie.wit.tennisapp.adapters.MembersListener
 import ie.wit.tennisapp.databinding.FragmentMembersBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
+import ie.wit.tennisapp.ui.results.ResultsFragmentDirections
+import ie.wit.tennisapp.utils.SwipeToDeleteCallback
+import ie.wit.tennisapp.utils.SwipeToEditCallback
 
 class MembersFragment : Fragment(), MembersListener {
 
@@ -52,10 +58,52 @@ class MembersFragment : Fragment(), MembersListener {
         fragBinding.recyclerView.layoutManager = layoutManager
         fragBinding.recyclerView.adapter = MemberAdapter(app.members.findAll(), this)
 
+        setEditAndDeleteSwipeFunctions()
         loadMembers()
         registerRefreshCallback()
 
         return root
+    }
+
+    private fun setEditAndDeleteSwipeFunctions() {
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onMemberDeleteSwiped(viewHolder.adapterPosition)
+            }
+        }
+        val swipeEditHandler = object : SwipeToEditCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onMemberEditSwiped(viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(fragBinding.recyclerView)
+        itemTouchEditHelper.attachToRecyclerView(fragBinding.recyclerView)
+    }
+
+    override fun onMemberDeleteSwiped(resultPosition: Int) {
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setMessage("Are you sure you want to delete this member?")?.setCancelable(false)
+            ?.setPositiveButton("Yes") { _, _ ->
+                var targetResult = app.members.findAll().elementAt(resultPosition)
+                val adapter = fragBinding.recyclerView.adapter as MemberAdapter
+                app.members.delete(targetResult)
+                adapter.notifyItemRemoved(resultPosition)
+                fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+            }?.setNegativeButton("No") { dialog, _ ->
+                fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+                dialog.dismiss()
+            }
+        builder?.create()?.show()
+    }
+
+    override fun onMemberEditSwiped(memberPosition: Int) {
+        val members = app.members.findAll()
+        val targetMember = members[memberPosition]
+        val launcherIntent = Intent(context, RegisterActivity::class.java)
+        launcherIntent.putExtra("member_edit", targetMember)
+        refreshIntentLauncher.launch(launcherIntent)
     }
 
     companion object {
@@ -64,24 +112,6 @@ class MembersFragment : Fragment(), MembersListener {
             MembersFragment().apply {
                 arguments = Bundle().apply { }
             }
-    }
-
-    override fun onEditMemberClick(member: MemberModel) {
-        val launcherIntent = Intent(context, RegisterActivity::class.java)
-        launcherIntent.putExtra("member_edit", member)
-        refreshIntentLauncher.launch(launcherIntent)
-    }
-
-    override fun onDeleteMemberClick(member: MemberModel) {
-        val builder = context?.let { AlertDialog.Builder(it) }
-        builder?.setMessage("Are you sure you want to delete this member?")?.setCancelable(false)
-            ?.setPositiveButton("Yes") { _, _ ->
-                app.members.delete(member)
-                fragBinding.recyclerView.adapter?.notifyDataSetChanged()
-            }?.setNegativeButton("No") { dialog, _ ->
-                dialog.dismiss()
-            }
-        builder?.create()?.show()
     }
 
     private fun registerRefreshCallback() {

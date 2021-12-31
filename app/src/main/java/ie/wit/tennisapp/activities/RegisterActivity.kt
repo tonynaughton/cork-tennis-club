@@ -14,16 +14,13 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityRegisterBinding
 import ie.wit.tennisapp.helpers.showImagePicker
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
-import org.w3c.dom.Text
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -61,11 +58,11 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
         if (intent.hasExtra("member_edit")) {
             edit = true
             member = intent.extras?.getParcelable("member_edit")!!
-            binding.memberFirstName.setText(member.firstName)
-            binding.memberLastName.setText(member.lastName)
+            binding.firstName.setText(member.firstName)
+            binding.lastName.setText(member.lastName)
             binding.memberEmail.setText(member.email)
             binding.memberPassword.setText(member.password)
-            binding.memberDob.setText(member.dob)
+            binding.dateOfBirth.setText(member.dateOfBirth)
             binding.experienceSpinner.setSelection(experienceOptions.indexOf(member.experience))
             binding.registerButton.setText(R.string.update_member)
             Picasso.get()
@@ -99,11 +96,11 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        member.firstName = binding.memberFirstName.text.toString()
-        member.lastName = binding.memberLastName.text.toString()
+        member.firstName = binding.firstName.text.toString()
+        member.lastName = binding.lastName.text.toString()
         member.email = binding.memberEmail.text.toString()
         member.password = binding.memberPassword.text.toString()
-        member.dob = binding.memberDob.text.toString()
+        member.dateOfBirth = binding.dateOfBirth.text.toString()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -130,20 +127,20 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
     private fun validateForm(): Boolean {
         var valid = true
 
-        val firstName = binding.memberFirstName.text.toString()
+        val firstName = binding.firstName.text.toString()
         if (TextUtils.isEmpty(firstName)) {
-            binding.memberFirstName.error = "Required."
+            binding.firstName.error = "Required."
             valid = false
         } else {
-            binding.memberFirstName.error = null
+            binding.lastName.error = null
         }
 
-        val lastName = binding.memberLastName.text.toString()
+        val lastName = binding.firstName.text.toString()
         if (TextUtils.isEmpty(lastName)) {
-            binding.memberLastName.error = "Required."
+            binding.lastName.error = "Required."
             valid = false
         } else {
-            binding.memberLastName.error = null
+            binding.lastName.error = null
         }
 
         val email = binding.memberEmail.text.toString()
@@ -162,12 +159,12 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             binding.memberPassword.error = null
         }
 
-        val dateOfBirth = binding.memberDob.text.toString()
+        val dateOfBirth = binding.dateOfBirth.text.toString()
         if (TextUtils.isEmpty(dateOfBirth)) {
-            binding.memberDob.error = "Required."
+            binding.dateOfBirth.error = "Required."
             valid = false
         } else {
-            binding.memberDob.error = null
+            binding.dateOfBirth.error = null
         }
 
         if (member.experience === getString(R.string.select_experience)) {

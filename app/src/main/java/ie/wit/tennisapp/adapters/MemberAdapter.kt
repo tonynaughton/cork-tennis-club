@@ -8,8 +8,8 @@ import ie.wit.tennisapp.databinding.CardMemberBinding
 import ie.wit.tennisapp.models.MemberModel
 
 interface MembersListener {
-    fun onEditMemberClick(member: MemberModel)
-    fun onDeleteMemberClick(member: MemberModel)
+    fun onMemberEditSwiped(memberPosition: Int)
+    fun onMemberDeleteSwiped(memberPosition: Int)
 }
 
 class MemberAdapter constructor(private var members: List<MemberModel>,
@@ -33,12 +33,12 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(member: MemberModel, listener: MembersListener) {
-            binding.memberFullName.text = member.firstName + " " + member.lastName
-            binding.memberDob.text = member.dob
-            binding.memberExperience.text = member.experience
             Picasso.get().load(member.image).resize(200,200).into(binding.imageIcon)
-            binding.editButton.setOnClickListener { listener.onEditMemberClick(member) }
-            binding.deleteButton.setOnClickListener { listener.onDeleteMemberClick(member) }
+//            binding.editButton.setOnClickListener { listener.onEditMemberClick(member) }
+//            binding.deleteButton.setOnClickListener { listener.onDeleteMemberClick(member) }
+
+            binding.member = member
+            binding.executePendingBindings()
         }
     }
 }

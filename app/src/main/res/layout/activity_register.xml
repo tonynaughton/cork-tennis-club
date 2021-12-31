@@ -34,7 +34,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/memberFirstName"
+                    android:id="@+id/firstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -48,7 +48,7 @@
                     android:layout_weight="1" />
 
                 <EditText
-                    android:id="@+id/memberLastName"
+                    android:id="@+id/lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -113,11 +113,11 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/memberDob"
+                    android:id="@+id/dateOfBirth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:hint="@string/hint_memberDob"
+                    android:hint="@string/hint_dateOfBirth"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"

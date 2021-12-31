@@ -13,7 +13,7 @@ data class MemberModel(
     var password: String = "",
     var firstName: String = "",
     var lastName: String = "",
-    var dob: String = "",
+    var dateOfBirth: String = "",
     var experience: String = "",
     var image: Uri = Uri.EMPTY
 ) : Parcelable
