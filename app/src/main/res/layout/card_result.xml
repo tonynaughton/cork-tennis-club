@@ -22,6 +22,15 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
+            <TextView
+                android:id="@+id/resultDate"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:gravity="center_vertical"
+                tools:text="@{result.date}"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -32,7 +41,7 @@
                     android:id="@+id/resultPlayerOne"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:padding="10dp"
                     android:layout_gravity="center_vertical"
@@ -41,7 +50,7 @@
                     android:id="@+id/resultPlayerTwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:padding="10dp"
                     android:layout_gravity="center_vertical"
@@ -56,7 +65,7 @@
                     android:id="@+id/resultPlayerOneScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     tools:text="@{Integer.toString(result.p1Score)}"
                     android:padding="10dp"
@@ -65,7 +74,7 @@
                     android:id="@+id/resultPlayerTwoScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:padding="10dp"
                     tools:text="@{Integer.toString(result.p2Score)}"

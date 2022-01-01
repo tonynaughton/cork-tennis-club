@@ -32,11 +32,6 @@ class ResultAdapter constructor(private var results: List<ResultModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(result: ResultModel, listener: ResultsListener) {
-//            binding.resultPlayerOne.text = result.playerOne
-//            binding.resultPlayerTwo.text = result.playerTwo
-//            binding.resultPlayerOneScore.text = result.p1Score.toString()
-//            binding.resultPlayerTwoScore.text = result.p2Score.toString()
-
             binding.result = result
             binding.executePendingBindings()
         }
