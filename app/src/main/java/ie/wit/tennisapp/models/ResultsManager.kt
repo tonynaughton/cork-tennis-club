@@ -16,8 +16,11 @@ object ResultsManager : ResultStore {
         return results
     }
 
-    override fun findById(id: Long): ResultModel {
-        TODO("Not yet implemented")
+    override fun findById(id: Long): ResultModel? {
+        var result = results.find {
+            it.id == id
+        }
+        return result
     }
 
     override fun create(result: ResultModel) {

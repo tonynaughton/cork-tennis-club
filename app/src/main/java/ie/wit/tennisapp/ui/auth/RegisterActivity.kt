@@ -1,4 +1,4 @@
-package ie.wit.tennisapp.activities
+package ie.wit.tennisapp.ui.auth
 
 import android.content.Intent
 import android.net.Uri
@@ -21,6 +21,7 @@ import ie.wit.tennisapp.databinding.ActivityRegisterBinding
 import ie.wit.tennisapp.helpers.showImagePicker
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
+import ie.wit.tennisapp.ui.home.Home
 import timber.log.Timber
 import timber.log.Timber.i
 

@@ -1,16 +1,16 @@
-package ie.wit.tennisapp.activities
+package ie.wit.tennisapp.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import ie.wit.tennisapp.R
-import ie.wit.tennisapp.auth.LoginRegisterViewModel
+import ie.wit.tennisapp.ui.auth.LoginRegisterViewModel
 import ie.wit.tennisapp.databinding.ActivityWelcomeBinding
 import ie.wit.tennisapp.main.MainApp
+import ie.wit.tennisapp.ui.auth.LoginActivity
+import ie.wit.tennisapp.ui.auth.RegisterActivity
+import ie.wit.tennisapp.ui.home.Home
 
 class WelcomeActivity: AppCompatActivity() {
 

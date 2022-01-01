@@ -1,4 +1,4 @@
-package ie.wit.tennisapp.activities
+package ie.wit.tennisapp.ui.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +17,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.auth.LoginRegisterViewModel
 import ie.wit.tennisapp.databinding.ActivityLoginBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
+import ie.wit.tennisapp.ui.home.Home
 import timber.log.Timber
 
 class LoginActivity() : AppCompatActivity(), View.OnClickListener {

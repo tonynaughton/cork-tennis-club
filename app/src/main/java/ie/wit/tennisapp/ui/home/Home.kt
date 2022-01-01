@@ -1,4 +1,4 @@
-package ie.wit.tennisapp.activities
+package ie.wit.tennisapp.ui.home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.*
 import com.google.firebase.auth.FirebaseUser
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.auth.LoggedInViewModel
+import ie.wit.tennisapp.ui.welcome.WelcomeActivity
+import ie.wit.tennisapp.ui.auth.LoggedInViewModel
 import ie.wit.tennisapp.databinding.HomeBinding
 import ie.wit.tennisapp.databinding.NavHeaderBinding
 

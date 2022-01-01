@@ -9,18 +9,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.activities.RegisterActivity
+import ie.wit.tennisapp.ui.auth.RegisterActivity
 import ie.wit.tennisapp.adapters.MemberAdapter
 import ie.wit.tennisapp.adapters.MembersListener
 import ie.wit.tennisapp.databinding.FragmentMembersBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
-import ie.wit.tennisapp.ui.results.ResultsFragmentDirections
 import ie.wit.tennisapp.utils.SwipeToDeleteCallback
 import ie.wit.tennisapp.utils.SwipeToEditCallback
 
