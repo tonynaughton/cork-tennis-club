@@ -103,6 +103,7 @@
                     android:padding="8dp"
                     android:layout_weight="4"
                     android:scaleType="centerInside"
+                    android:textColor="@color/colorPrimaryDark"
                     android:backgroundTint="@color/colorAccent" />
 
             </LinearLayout>
@@ -112,29 +113,38 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/dateOfBirth"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_dateOfBirth"
+                    android:textSize="18sp"
+                    android:layout_margin="8dp"/>
+                <TextView
+                    android:id="@+id/result_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"/>
+
+                <Button
+                    android:id="@+id/addDateButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:hint="@string/hint_dateOfBirth"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
-
-                <Spinner
-                    android:id="@+id/experienceSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:textSize="18dp"/>
+                    android:text="@string/change_date" />
 
             </LinearLayout>
+
+            <Spinner
+                android:id="@+id/experienceSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:textSize="18dp"/>
 
             <Button
                 android:id="@+id/chooseImage"
@@ -144,7 +154,7 @@
                 android:background="@color/colorAccent"
                 android:padding="8dp"
                 android:text="@string/button_addImage"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
             <ImageView
@@ -162,7 +172,7 @@
                 android:padding="8dp"
                 android:stateListAnimator="@null"
                 android:text="@string/register"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
         </LinearLayout>
 

@@ -1,5 +1,6 @@
 package ie.wit.tennisapp.ui.auth
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,8 @@ import ie.wit.tennisapp.models.MemberModel
 import ie.wit.tennisapp.ui.home.Home
 import timber.log.Timber
 import timber.log.Timber.i
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
 
@@ -34,6 +37,9 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     private lateinit var togglePasswordVisButton: ImageButton
     var edit = false
+    var cal: Calendar = Calendar.getInstance()
+    private var userDateOfBirth: TextView? = null
+    private var buttonAddDate: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +62,30 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             experienceSpinner.adapter = adapter
         }
 
+        userDateOfBirth = binding.resultDate
+        buttonAddDate = binding.addDateButton
+
+        userDateOfBirth!!.text = "--/--/----"
+
+        // Date picker implemented with reference to https://www.tutorialkart.com/kotlin-android/android-datepicker-kotlin-example/
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
+
+        buttonAddDate!!.setOnClickListener {
+            DatePickerDialog(
+                this,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
         if (intent.hasExtra("member_edit")) {
             edit = true
             member = intent.extras?.getParcelable("member_edit")!!
@@ -63,7 +93,7 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             binding.lastName.setText(member.lastName)
             binding.email.setText(member.email)
             binding.password.setText(member.password)
-            binding.dateOfBirth.setText(member.dateOfBirth)
+            userDateOfBirth!!.text = member.dateOfBirth
             binding.experienceSpinner.setSelection(experienceOptions.indexOf(member.experience))
             binding.registerButton.setText(R.string.update_member)
             Picasso.get()
@@ -91,6 +121,12 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
         auth = FirebaseAuth.getInstance()
     }
 
+    private fun updateDateInView() {
+        val myFormat = "dd/MM/yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+        userDateOfBirth!!.text = sdf.format(cal.time)
+    }
+
     private fun createAccount(email: String, password: String) {
         Timber.d( "createAccount:$email")
         if (!validateForm()) {
@@ -101,7 +137,7 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
         member.lastName = binding.lastName.text.toString()
         member.email = binding.email.text.toString()
         member.password = binding.password.text.toString()
-        member.dateOfBirth = binding.dateOfBirth.text.toString()
+        member.dateOfBirth = userDateOfBirth!!.text.toString()
 
         if (edit) {
             auth.currentUser!!.updateEmail(member.email)
@@ -162,12 +198,12 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             binding.password.error = null
         }
 
-        val dateOfBirth = binding.dateOfBirth.text.toString()
+        val dateOfBirth = userDateOfBirth!!.text.toString()
         if (TextUtils.isEmpty(dateOfBirth)) {
-            binding.dateOfBirth.error = "Required."
+            userDateOfBirth!!.error = "Required."
             valid = false
         } else {
-            binding.dateOfBirth.error = null
+            userDateOfBirth!!.error = null
         }
 
         if (member.experience === getString(R.string.select_experience)) {
