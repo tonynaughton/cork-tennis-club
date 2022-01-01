@@ -32,8 +32,6 @@ class MembersFragment : Fragment(), MembersListener {
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var auth: FirebaseAuth
 
-    private lateinit var membersViewModel: MembersViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
@@ -49,13 +47,6 @@ class MembersFragment : Fragment(), MembersListener {
         _fragBinding = FragmentMembersBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.menu_members)
-
-        membersViewModel =
-            ViewModelProvider(this).get(MembersViewModel::class.java)
-        //val textView: TextView = root.findViewById(R.id.text_gallery)
-        membersViewModel.text.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
-        })
 
         val layoutManager = LinearLayoutManager(context)
         fragBinding.recyclerView.layoutManager = layoutManager

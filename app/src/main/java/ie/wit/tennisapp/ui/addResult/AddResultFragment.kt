@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,7 +15,6 @@ import ie.wit.tennisapp.databinding.FragmentAddResultBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.ResultModel
 import ie.wit.tennisapp.models.ResultsManager
-import ie.wit.tennisapp.ui.results.ResultsViewModel
 
 class AddResultFragment : Fragment() {
 
@@ -135,10 +133,5 @@ class AddResultFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _fragBinding = null
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val resultsViewModel = ViewModelProvider(this).get(ResultsViewModel::class.java)
     }
 }

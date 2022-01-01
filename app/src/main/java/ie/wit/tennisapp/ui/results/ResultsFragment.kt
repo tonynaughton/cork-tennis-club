@@ -30,7 +30,6 @@ class ResultsFragment : Fragment(), ResultsListener {
     private var _fragBinding: FragmentResultsBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
-//    private lateinit var resultsViewModel: ResultsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
