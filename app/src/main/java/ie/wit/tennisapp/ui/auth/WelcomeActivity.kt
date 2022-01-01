@@ -1,22 +1,19 @@
-package ie.wit.tennisapp.ui.welcome
+package ie.wit.tennisapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import ie.wit.tennisapp.ui.auth.LoginRegisterViewModel
 import ie.wit.tennisapp.databinding.ActivityWelcomeBinding
 import ie.wit.tennisapp.main.MainApp
-import ie.wit.tennisapp.ui.auth.LoginActivity
-import ie.wit.tennisapp.ui.auth.RegisterActivity
 import ie.wit.tennisapp.ui.home.Home
 
 class WelcomeActivity: AppCompatActivity() {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityWelcomeBinding
-    private lateinit var loginRegisterViewModel : LoginRegisterViewModel
+    private lateinit var authenticationViewModel : AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +35,8 @@ class WelcomeActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        loginRegisterViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
-        loginRegisterViewModel.liveFirebaseUser.observe(this, Observer {
+        authenticationViewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
+        authenticationViewModel.liveFirebaseUser.observe(this, Observer {
                 firebaseUser -> if (firebaseUser != null)
             startActivity(Intent(this, Home::class.java))
         })

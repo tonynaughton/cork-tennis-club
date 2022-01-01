@@ -6,7 +6,7 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.ui.welcome.WelcomeActivity
+import ie.wit.tennisapp.ui.auth.WelcomeActivity
 
 //Implemented with reference to the following article
 //https://www.geeksforgeeks.org/how-to-create-a-splash-screen-in-android-using-kotlin/

@@ -25,7 +25,7 @@ import timber.log.Timber
 
 class LoginActivity() : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var loginRegisterViewModel : LoginRegisterViewModel
+    private lateinit var authenticationViewModel : AuthenticationViewModel
     private lateinit var binding: ActivityLoginBinding
     var member = MemberModel()
     lateinit var app: MainApp
@@ -57,19 +57,19 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        loginRegisterViewModel.login(email, password)
+        authenticationViewModel.login(email, password)
     }
 
     public override fun onStart() {
         super.onStart()
 
-        loginRegisterViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
-        loginRegisterViewModel.liveFirebaseUser.observe(this, Observer {
+        authenticationViewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
+        authenticationViewModel.liveFirebaseUser.observe(this, Observer {
             firebaseUser -> if (firebaseUser != null)
                 startActivity(Intent(this, Home::class.java))
         })
 
-        loginRegisterViewModel.firebaseAuthManager.errorStatus.observe(this, Observer
+        authenticationViewModel.firebaseAuthManager.errorStatus.observe(this, Observer
         { status -> checkStatus(status) })
     }
 
@@ -83,27 +83,27 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
     private fun validateForm(): Boolean {
         var valid = true
 
-        val email = binding.memberEmail.text.toString()
+        val email = binding.email.text.toString()
         if (TextUtils.isEmpty(email)) {
-            binding.memberEmail.error = "Required."
+            binding.email.error = "Required."
             valid = false
         } else {
-            binding.memberEmail.error = null
+            binding.email.error = null
         }
 
-        val password = binding.memberPassword.text.toString()
+        val password = binding.password.text.toString()
         if (TextUtils.isEmpty(password)) {
-            binding.memberPassword.error = "Required."
+            binding.password.error = "Required."
             valid = false
         } else {
-            binding.memberPassword.error = null
+            binding.password.error = null
         }
 
         return valid
     }
 
     private fun togglePasswordVisibility() {
-        val passwordEntry = findViewById<EditText>(R.id.memberPassword)
+        val passwordEntry = findViewById<EditText>(R.id.password)
         if(togglePasswordVisButton.drawable.constantState == ContextCompat.getDrawable(this, R.drawable.ic_eye)?.constantState) {
             togglePasswordVisButton.setImageResource(R.drawable.ic_eye_slash)
             passwordEntry.transformationMethod = HideReturnsTransformationMethod.getInstance()
@@ -129,7 +129,7 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.loginButton -> logIn(binding.memberEmail.text.toString(), binding.memberPassword.text.toString())
+            R.id.loginButton -> logIn(binding.email.text.toString(), binding.password.text.toString())
             R.id.togglePasswordVisButton -> togglePasswordVisibility()
         }
     }

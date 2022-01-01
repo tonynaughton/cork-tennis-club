@@ -3,6 +3,7 @@ package ie.wit.tennisapp.ui.members
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.ui.auth.RegisterActivity
 import ie.wit.tennisapp.adapters.MemberAdapter
@@ -28,6 +30,7 @@ class MembersFragment : Fragment(), MembersListener {
     private var _fragBinding: FragmentMembersBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var membersViewModel: MembersViewModel
 
@@ -35,6 +38,8 @@ class MembersFragment : Fragment(), MembersListener {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
         setHasOptionsMenu(true)
+
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -99,9 +104,16 @@ class MembersFragment : Fragment(), MembersListener {
     override fun onMemberEditSwiped(memberPosition: Int) {
         val members = app.members.findAll()
         val targetMember = members[memberPosition]
-        val launcherIntent = Intent(context, RegisterActivity::class.java)
-        launcherIntent.putExtra("member_edit", targetMember)
-        refreshIntentLauncher.launch(launcherIntent)
+        if (auth.currentUser!!.uid != targetMember.uuid) {
+            Toast.makeText(context,
+                getString(R.string.member_edit_denied),
+                Toast.LENGTH_LONG).show()
+            fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+        } else {
+            val launcherIntent = Intent(context, RegisterActivity::class.java)
+            launcherIntent.putExtra("member_edit", targetMember)
+            refreshIntentLauncher.launch(launcherIntent)
+        }
     }
 
     companion object {

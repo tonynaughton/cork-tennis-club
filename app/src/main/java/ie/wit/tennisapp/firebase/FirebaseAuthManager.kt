@@ -39,19 +39,6 @@ class FirebaseAuthManager(application: Application) {
             })
     }
 
-    fun register(email: String?, password: String?) {
-        firebaseAuth!!.createUserWithEmailAndPassword(email!!, password!!)
-            .addOnCompleteListener(application!!.mainExecutor, { task ->
-                if (task.isSuccessful) {
-                    liveFirebaseUser.postValue(firebaseAuth!!.currentUser)
-                    errorStatus.postValue(false)
-                } else {
-                    Timber.i( "Registration Failure: $task.exception!!.message")
-                    errorStatus.postValue(true)
-                }
-            })
-    }
-
     fun logOut() {
         firebaseAuth!!.signOut()
         loggedOut.postValue(true)

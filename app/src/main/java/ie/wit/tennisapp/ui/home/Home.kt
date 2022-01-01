@@ -12,7 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.firebase.auth.FirebaseUser
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.ui.welcome.WelcomeActivity
+import ie.wit.tennisapp.ui.auth.WelcomeActivity
 import ie.wit.tennisapp.ui.auth.LoggedInViewModel
 import ie.wit.tennisapp.databinding.HomeBinding
 import ie.wit.tennisapp.databinding.NavHeaderBinding

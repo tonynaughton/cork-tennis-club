@@ -61,8 +61,8 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             member = intent.extras?.getParcelable("member_edit")!!
             binding.firstName.setText(member.firstName)
             binding.lastName.setText(member.lastName)
-            binding.memberEmail.setText(member.email)
-            binding.memberPassword.setText(member.password)
+            binding.email.setText(member.email)
+            binding.password.setText(member.password)
             binding.dateOfBirth.setText(member.dateOfBirth)
             binding.experienceSpinner.setSelection(experienceOptions.indexOf(member.experience))
             binding.registerButton.setText(R.string.update_member)
@@ -99,30 +99,32 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
 
         member.firstName = binding.firstName.text.toString()
         member.lastName = binding.lastName.text.toString()
-        member.email = binding.memberEmail.text.toString()
-        member.password = binding.memberPassword.text.toString()
+        member.email = binding.email.text.toString()
+        member.password = binding.password.text.toString()
         member.dateOfBirth = binding.dateOfBirth.text.toString()
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Timber.d( "createUserWithEmail:success")
-                    member.uuid = auth.currentUser!!.uid
-                    if (edit) {
-                        app.members.update(member.copy())
-                    } else {
+        if (edit) {
+            auth.currentUser!!.updateEmail(member.email)
+            auth.currentUser!!.updatePassword(member.password)
+            app.members.update(member.copy())
+        } else {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Timber.d( "createUserWithEmail:success")
+                        member.uuid = auth.currentUser!!.uid
                         app.members.create(member.copy())
+                        Toast.makeText(baseContext, "Registration successful.",
+                            Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, Home::class.java))
+                        setResult(RESULT_OK)
+                    } else {
+                        Timber.w( "createUserWithEmail:failure $task.exception")
+                        Toast.makeText(baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(baseContext, "Registration successful.",
-                        Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, Home::class.java))
-                    setResult(RESULT_OK)
-                } else {
-                    Timber.w( "createUserWithEmail:failure $task.exception")
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
                 }
-            }
+        }
     }
 
     private fun validateForm(): Boolean {
@@ -144,20 +146,20 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             binding.lastName.error = null
         }
 
-        val email = binding.memberEmail.text.toString()
+        val email = binding.email.text.toString()
         if (TextUtils.isEmpty(email)) {
-            binding.memberEmail.error = "Required."
+            binding.email.error = "Required."
             valid = false
         } else {
-            binding.memberEmail.error = null
+            binding.email.error = null
         }
 
-        val password = binding.memberPassword.text.toString()
+        val password = binding.password.text.toString()
         if (TextUtils.isEmpty(password)) {
-            binding.memberPassword.error = "Required."
+            binding.password.error = "Required."
             valid = false
         } else {
-            binding.memberPassword.error = null
+            binding.password.error = null
         }
 
         val dateOfBirth = binding.dateOfBirth.text.toString()
@@ -179,7 +181,7 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun togglePasswordVisibility() {
-        val passwordEntry = findViewById<EditText>(R.id.memberPassword)
+        val passwordEntry = findViewById<EditText>(R.id.password)
         if(togglePasswordVisButton.drawable.constantState == ContextCompat.getDrawable(this, R.drawable.ic_eye)?.constantState) {
             togglePasswordVisButton.setImageResource(R.drawable.ic_eye_slash)
             passwordEntry.transformationMethod = HideReturnsTransformationMethod.getInstance()
@@ -226,8 +228,8 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.registerButton -> createAccount(
-                binding.memberEmail.text.toString(),
-                binding.memberPassword.text.toString()
+                binding.email.text.toString(),
+                binding.password.text.toString()
             )
             R.id.chooseImage -> showImagePicker(imageIntentLauncher)
             R.id.togglePasswordVisButton -> togglePasswordVisibility()

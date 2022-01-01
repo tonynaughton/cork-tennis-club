@@ -34,8 +34,6 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
 
         fun bind(member: MemberModel, listener: MembersListener) {
             Picasso.get().load(member.image).resize(200,200).into(binding.imageIcon)
-//            binding.editButton.setOnClickListener { listener.onEditMemberClick(member) }
-//            binding.deleteButton.setOnClickListener { listener.onDeleteMemberClick(member) }
 
             binding.member = member
             binding.executePendingBindings()

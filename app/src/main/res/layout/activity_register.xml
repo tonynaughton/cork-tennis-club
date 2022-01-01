@@ -64,12 +64,12 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/memberEmail"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:hint="@string/hint_emailAddress"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:padding="8dp"
@@ -83,7 +83,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/memberPassword"
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
