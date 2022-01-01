@@ -1,4 +1,4 @@
-package ie.wit.tennisapp.utils
+package ie.wit.tennisapp.helpers
 
 import android.content.Context
 import android.graphics.*

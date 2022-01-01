@@ -7,22 +7,19 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ie.wit.tennisapp.R
-import ie.wit.tennisapp.ui.addResult.AddResultFragment
 import ie.wit.tennisapp.adapters.ResultAdapter
 import ie.wit.tennisapp.adapters.ResultsListener
 import ie.wit.tennisapp.databinding.FragmentResultsBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.ResultModel
-import ie.wit.tennisapp.utils.SwipeToDeleteCallback
-import ie.wit.tennisapp.utils.SwipeToEditCallback
+import ie.wit.tennisapp.helpers.SwipeToDeleteCallback
+import ie.wit.tennisapp.helpers.SwipeToEditCallback
 
 class ResultsFragment : Fragment(), ResultsListener {
 

@@ -8,8 +8,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +19,8 @@ import ie.wit.tennisapp.adapters.MembersListener
 import ie.wit.tennisapp.databinding.FragmentMembersBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.MemberModel
-import ie.wit.tennisapp.utils.SwipeToDeleteCallback
-import ie.wit.tennisapp.utils.SwipeToEditCallback
+import ie.wit.tennisapp.helpers.SwipeToDeleteCallback
+import ie.wit.tennisapp.helpers.SwipeToEditCallback
 
 class MembersFragment : Fragment(), MembersListener {
 
@@ -76,20 +74,29 @@ class MembersFragment : Fragment(), MembersListener {
         itemTouchEditHelper.attachToRecyclerView(fragBinding.recyclerView)
     }
 
-    override fun onMemberDeleteSwiped(resultPosition: Int) {
-        val builder = context?.let { AlertDialog.Builder(it) }
-        builder?.setMessage("Are you sure you want to delete this member?")?.setCancelable(false)
-            ?.setPositiveButton("Yes") { _, _ ->
-                var targetResult = app.members.findAll().elementAt(resultPosition)
-                val adapter = fragBinding.recyclerView.adapter as MemberAdapter
-                app.members.delete(targetResult)
-                adapter.notifyItemRemoved(resultPosition)
-                fragBinding.recyclerView.adapter?.notifyDataSetChanged()
-            }?.setNegativeButton("No") { dialog, _ ->
-                fragBinding.recyclerView.adapter?.notifyDataSetChanged()
-                dialog.dismiss()
-            }
-        builder?.create()?.show()
+    override fun onMemberDeleteSwiped(memberPosition: Int) {
+        val members = app.members.findAll()
+        val targetMember = members[memberPosition]
+        if (auth.currentUser!!.uid != targetMember.uuid) {
+            Toast.makeText(context,
+                getString(R.string.member_delete_denied),
+                Toast.LENGTH_LONG).show()
+            fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+        } else {
+            val builder = context?.let { AlertDialog.Builder(it) }
+            builder?.setMessage(getString(R.string.confirm_member_delete))
+                ?.setCancelable(false)
+                ?.setPositiveButton("Yes") { _, _ ->
+                    val adapter = fragBinding.recyclerView.adapter as MemberAdapter
+                    app.members.delete(targetMember)
+                    adapter.notifyItemRemoved(memberPosition)
+                    fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+                }?.setNegativeButton("No") { dialog, _ ->
+                    fragBinding.recyclerView.adapter?.notifyDataSetChanged()
+                    dialog.dismiss()
+                }
+            builder?.create()?.show()
+        }
     }
 
     override fun onMemberEditSwiped(memberPosition: Int) {

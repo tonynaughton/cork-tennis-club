@@ -12,9 +12,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.ActivityLoginBinding
@@ -31,6 +37,7 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
     lateinit var app: MainApp
     private lateinit var auth: FirebaseAuth
     private lateinit var togglePasswordVisButton: ImageButton
+    private lateinit var startForResult : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +51,13 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
 
         binding.loginButton.setOnClickListener(this)
         binding.togglePasswordVisButton.setOnClickListener(this)
+        binding.googleSignInButton.setOnClickListener(this)
 
         togglePasswordVisButton = findViewById(R.id.togglePasswordVisButton)
         togglePasswordVisButton.setImageResource(R.drawable.ic_eye)
+
+        binding.googleSignInButton.setSize(SignInButton.SIZE_WIDE)
+        binding.googleSignInButton.setColorScheme(0)
 
         auth = FirebaseAuth.getInstance()
     }
@@ -71,6 +82,8 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
 
         authenticationViewModel.firebaseAuthManager.errorStatus.observe(this, Observer
         { status -> checkStatus(status) })
+
+        setupGoogleSignInCallback()
     }
 
     private fun checkStatus(error:Boolean) {
@@ -102,6 +115,37 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
         return valid
     }
 
+    private fun googleSignIn() {
+        val signInIntent = authenticationViewModel.firebaseAuthManager
+            .googleSignInClient.value!!.signInIntent
+
+        startForResult.launch(signInIntent)
+    }
+
+    private fun setupGoogleSignInCallback() {
+        startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                        try {
+                            val account = task.getResult(ApiException::class.java)
+                            authenticationViewModel.authWithGoogle(account!!)
+                        } catch (e: ApiException) {
+                            Timber.i( "Google sign in failed $e")
+                            Toast.makeText(this,
+                                getString(R.string.auth_failed),
+                                Toast.LENGTH_LONG).show()
+                        }
+                        Timber.i("DonationX Google Result $result.data")
+                    }
+                    RESULT_CANCELED -> {
+
+                    } else -> { }
+                }
+            }
+    }
+
     private fun togglePasswordVisibility() {
         val passwordEntry = findViewById<EditText>(R.id.password)
         if(togglePasswordVisButton.drawable.constantState == ContextCompat.getDrawable(this, R.drawable.ic_eye)?.constantState) {
@@ -131,6 +175,7 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.loginButton -> logIn(binding.email.text.toString(), binding.password.text.toString())
             R.id.togglePasswordVisButton -> togglePasswordVisibility()
+            R.id.googleSignInButton -> googleSignIn()
         }
     }
 }

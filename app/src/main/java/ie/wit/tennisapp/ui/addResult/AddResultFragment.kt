@@ -14,14 +14,12 @@ import ie.wit.tennisapp.R
 import ie.wit.tennisapp.databinding.FragmentAddResultBinding
 import ie.wit.tennisapp.main.MainApp
 import ie.wit.tennisapp.models.ResultModel
-import ie.wit.tennisapp.models.ResultsManager
 
 class AddResultFragment : Fragment() {
 
     lateinit var app: MainApp
     private var _fragBinding: FragmentAddResultBinding? = null
     private val fragBinding get() = _fragBinding!!
-    private lateinit var addResultViewModel: AddResultViewModel
 
     var result = ResultModel()
     var edit = false
@@ -39,13 +37,6 @@ class AddResultFragment : Fragment() {
         _fragBinding = FragmentAddResultBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.menu_addResult)
-
-        addResultViewModel = ViewModelProvider(this).get(AddResultViewModel::class.java)
-        addResultViewModel.observableStatus.observe(viewLifecycleOwner, Observer {
-                status -> status?.let { render(status) }
-        })
-
-
 
         val allMembers = app.members.findAll()
         var memberNames: MutableList<String> = allMembers.map{it.firstName + " " + it.lastName} as MutableList<String>
@@ -92,7 +83,6 @@ class AddResultFragment : Fragment() {
         when (status) {
             true -> {
                 view?.let {
-                    //Uncomment this if you want to immediately return to Report
                     findNavController().popBackStack()
                 }
             }
@@ -113,10 +103,9 @@ class AddResultFragment : Fragment() {
                 result.p1Score = p1score.toInt()
                 result.p2Score = p2score.toInt()
                 if (edit) {
-//                    app.results.update(result.copy())
+                    app.results.update(result.copy())
                 } else {
-                    ResultsManager.create(result.copy())
-//                    app.results.create(result.copy())
+                    app.results.create(result.copy())
                 }
             }
         }

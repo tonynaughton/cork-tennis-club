@@ -11,11 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.firebase.auth.FirebaseUser
+import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
 import ie.wit.tennisapp.ui.auth.WelcomeActivity
 import ie.wit.tennisapp.ui.auth.LoggedInViewModel
 import ie.wit.tennisapp.databinding.HomeBinding
 import ie.wit.tennisapp.databinding.NavHeaderBinding
+import ie.wit.tennisapp.helpers.customTransformation
 
 class Home : AppCompatActivity() {
 
@@ -71,6 +73,15 @@ class Home : AppCompatActivity() {
         var headerView = homeBinding.navView.getHeaderView(0)
         navHeaderBinding = NavHeaderBinding.bind(headerView)
         navHeaderBinding.navHeaderEmail.text = currentUser.email
+
+        if(currentUser.photoUrl != null && currentUser.displayName != null) {
+            navHeaderBinding.navHeaderName.text = currentUser.displayName
+            Picasso.get().load(currentUser.photoUrl)
+                .resize(200, 200)
+                .transform(customTransformation())
+                .centerCrop()
+                .into(navHeaderBinding.navHeaderImage)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
