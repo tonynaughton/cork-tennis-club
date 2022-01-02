@@ -15,6 +15,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import ie.wit.tennisapp.R
@@ -144,6 +145,10 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
             auth.currentUser!!.updateEmail(member.email)
             auth.currentUser!!.updatePassword(member.password)
             app.members.update(member.copy())
+            Toast.makeText(baseContext, "Member details updated.",
+                Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Home::class.java))
+            setResult(RESULT_OK)
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->

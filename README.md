@@ -30,13 +30,8 @@ Data binding was used in the Result and Member adapters for a more seamless deve
 
 ## Git Approach
 
-The app had new features introduced over multiple tagged releases.
+I used a single branch for committing changes. The app is comprised of 5 major releases, with each release consisting of significant improvements.
 
 ## Personal Statement
 
 Developing this app was a challenge, but a rewarding one nonetheless. Prior to starting this module I had little knowledge on the world of mobile app development, so it was a great opportunity to gain experience with the fundementals of building a mobile app such as file hierarchies, layouts, UX/DX principles, emulators, adapters, navigation methods etc. It was my first exposure to Kotlin, so it was interesting to learn how it stacked up against Java and what the pros and cons of the language were. It was also good to gain experience with a new IDE in Android Studio.
-
-## References
-
-[Date picker implementation](https://www.tutorialkart.com/kotlin-android/android-datepicker-kotlin-example/)
-[Date picker styling](https://stackoverflow.com/questions/44418149/cant-get-android-datepickerdialog-to-switch-to-spinner-mode)
