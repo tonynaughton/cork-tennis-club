@@ -48,7 +48,7 @@ class MembersFragment : Fragment(), MembersListener {
 
         val layoutManager = LinearLayoutManager(context)
         fragBinding.recyclerView.layoutManager = layoutManager
-        fragBinding.recyclerView.adapter = MemberAdapter(app.members.findAll(), this)
+        fragBinding.recyclerView.adapter = MemberAdapter(app.members.findAll())
 
         setEditAndDeleteSwipeFunctions()
         loadMembers()
@@ -114,14 +114,6 @@ class MembersFragment : Fragment(), MembersListener {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            MembersFragment().apply {
-                arguments = Bundle().apply { }
-            }
-    }
-
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -138,7 +130,7 @@ class MembersFragment : Fragment(), MembersListener {
     }
 
     private fun showMembers(members: List<MemberModel>) {
-        fragBinding.recyclerView.adapter = MemberAdapter(members, this)
+        fragBinding.recyclerView.adapter = MemberAdapter(members)
         fragBinding.recyclerView.adapter?.notifyDataSetChanged()
     }
 

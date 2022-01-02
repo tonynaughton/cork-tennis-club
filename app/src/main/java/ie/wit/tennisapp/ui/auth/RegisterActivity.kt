@@ -79,6 +79,7 @@ class RegisterActivity() : AppCompatActivity(), View.OnClickListener {
         buttonAddDate!!.setOnClickListener {
             DatePickerDialog(
                 this,
+                R.style.datePickerStyle,
                 dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),

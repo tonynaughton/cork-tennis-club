@@ -26,7 +26,7 @@
                 android:textSize="18sp"
                 android:layout_margin="5dp"/>
             <TextView
-                android:id="@+id/result_date"
+                android:id="@+id/resultDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -111,14 +111,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/add_result_button"
+        android:id="@+id/addResultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@color/colorAccent"
         android:padding="8dp"
         android:stateListAnimator="@null"
-        android:text="@string/button_addResult"
+        android:text="@string/add_result"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp" />
 </LinearLayout>

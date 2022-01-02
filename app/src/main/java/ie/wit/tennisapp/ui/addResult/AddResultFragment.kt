@@ -44,7 +44,7 @@ class AddResultFragment : Fragment() {
         if (edit) {
             activity?.title = getString(R.string.menu_editResult)
         } else {
-            activity?.title = getString(R.string.menu_addResult)
+            activity?.title = getString(R.string.add_result)
         }
 
         val allMembers = app.members.findAll()
@@ -75,6 +75,7 @@ class AddResultFragment : Fragment() {
         buttonAddDate!!.setOnClickListener {
             DatePickerDialog(
                 context!!,
+                R.style.datePickerStyle,
                 dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),

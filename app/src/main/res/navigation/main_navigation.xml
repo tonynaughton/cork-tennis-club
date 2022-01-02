@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/addResultFragment"
         android:name="ie.wit.tennisapp.ui.addResult.AddResultFragment"
-        android:label="@string/menu_addResult"
+        android:label="@string/add_result"
         tools:layout="@layout/fragment_add_result" >
         <action
             android:id="@+id/action_addResultFragment_to_resultsFragment"

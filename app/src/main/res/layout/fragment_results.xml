@@ -23,7 +23,7 @@
         android:id="@+id/resultsNotFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/resultsNotFound"
+        android:text="@string/results_not_found"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"

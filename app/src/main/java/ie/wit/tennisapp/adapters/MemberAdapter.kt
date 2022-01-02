@@ -12,8 +12,7 @@ interface MembersListener {
     fun onMemberDeleteSwiped(memberPosition: Int)
 }
 
-class MemberAdapter constructor(private var members: List<MemberModel>,
-                                private val listener: MembersListener) :
+class MemberAdapter constructor(private var members: List<MemberModel>) :
     RecyclerView.Adapter<MemberAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -24,7 +23,7 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val member = members[holder.adapterPosition]
-        holder.bind(member, listener)
+        holder.bind(member)
     }
 
     override fun getItemCount(): Int = members.size
@@ -32,7 +31,7 @@ class MemberAdapter constructor(private var members: List<MemberModel>,
     class MainHolder(private val binding : CardMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(member: MemberModel, listener: MembersListener) {
+        fun bind(member: MemberModel) {
             Picasso.get().load(member.image).resize(200,200).into(binding.imageIcon)
 
             binding.member = member
