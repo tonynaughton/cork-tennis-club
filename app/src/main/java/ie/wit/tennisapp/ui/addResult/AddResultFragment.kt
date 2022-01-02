@@ -75,7 +75,6 @@ class AddResultFragment : Fragment() {
         buttonAddDate!!.setOnClickListener {
             DatePickerDialog(
                 context!!,
-                R.style.datePickerStyle,
                 dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),

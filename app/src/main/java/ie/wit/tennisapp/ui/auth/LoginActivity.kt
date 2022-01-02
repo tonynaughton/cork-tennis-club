@@ -137,7 +137,7 @@ class LoginActivity() : AppCompatActivity(), View.OnClickListener {
                                 getString(R.string.auth_failed),
                                 Toast.LENGTH_LONG).show()
                         }
-                        Timber.i("DonationX Google Result $result.data")
+                        Timber.i("Cork Tennis Club - Google Result $result.data")
                     }
                     RESULT_CANCELED -> {
 
